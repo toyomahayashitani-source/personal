@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>クリニックAI デモメニュー</title>
+<style>
+  :root { --primary: #1a6b8f; --accent: #2ea87e; --text: #24323c; --muted: #6b7c88; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    background: #f4f7f9; color: var(--text);
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px;
+  }
+  h1 { color: var(--primary); font-size: 22px; margin-bottom: 6px; }
+  p.lead { color: var(--muted); font-size: 13px; margin-bottom: 28px; }
+  .menu { display: flex; flex-direction: column; gap: 14px; width: 100%; max-width: 460px; }
+  a.card {
+    background: #fff; border-radius: 14px; padding: 20px 22px; text-decoration: none; color: var(--text);
+    box-shadow: 0 4px 16px rgba(20,50,70,.1); border-left: 5px solid var(--accent);
+    transition: transform .15s;
+  }
+  a.card:hover { transform: translateY(-3px); }
+  a.card h2 { font-size: 16px; color: var(--primary); margin-bottom: 4px; }
+  a.card p { font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+  .soon { opacity: .55; border-left-color: #b9c6cf; pointer-events: none; }
+</style>
+</head>
+<body>
+  <h1>クリニックAI デモメニュー</h1>
+  <p class="lead">院長先生への実演用(所要 約10分)。データはすべて架空です。</p>
+  <div class="menu">
+    <a class="card" href="monshin-demo.html">
+      <h2>① 来院前AI問診</h2>
+      <p>患者さまがスマホで答える → 医師向けサマリーが受付に届くまでの流れ</p>
+    </a>
+    <a class="card" href="shorui-demo.html">
+      <h2>② 書類ドラフトAI</h2>
+      <p>走り書きメモ → 紹介状・診断書・主治医意見書の下書きが数十秒で完成</p>
+    </a>
+    <a class="card soon" href="#">
+      <h2>③ AI電話応対(準備中)</h2>
+      <p>予約・定型質問への24時間自動応対。実回線でのデモを準備中</p>
+    </a>
+  </div>
+</body>
+</html>

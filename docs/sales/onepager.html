@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>A4ペラ | 診察に集中できるクリニックへ</title>
+<style>
+  :root {
+    --primary: #1a6b8f;
+    --accent: #2ea87e;
+    --text: #24323c;
+    --muted: #5f707c;
+    --border: #d7e2e9;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @page { size: A4; margin: 0; }
+  body { background: #888; font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif; color: var(--text); }
+  .sheet {
+    width: 210mm; min-height: 297mm; background: #fff; margin: 0 auto;
+    padding: 16mm 15mm; display: flex; flex-direction: column; gap: 7mm;
+  }
+  @media print { body { background: #fff; } .sheet { margin: 0; } }
+
+  .head { border-left: 6px solid var(--primary); padding-left: 6mm; }
+  .head .sub { font-size: 11.5pt; color: var(--accent); font-weight: 700; letter-spacing: .05em; }
+  .head h1 { font-size: 21pt; line-height: 1.35; color: var(--primary); margin-top: 1mm; }
+  .head p { font-size: 10.5pt; color: var(--muted); margin-top: 2mm; }
+
+  .pain { background: #f2f7fa; border-radius: 4mm; padding: 5mm 6mm; }
+  .pain h2 { font-size: 11pt; color: var(--primary); margin-bottom: 2.5mm; }
+  .pain ul { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 5mm; font-size: 10pt; }
+  .pain li::before { content: "☑ "; color: var(--accent); font-weight: 700; }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4mm; }
+  .col { border: 1px solid var(--border); border-radius: 3mm; padding: 4mm; }
+  .col .num { font-size: 8.5pt; color: #fff; background: var(--accent); border-radius: 10mm; padding: .5mm 3mm; font-weight: 700; }
+  .col h3 { font-size: 11pt; color: var(--primary); margin: 2mm 0 1.5mm; }
+  .col p { font-size: 9pt; line-height: 1.65; color: var(--text); }
+
+  .flow { border: 1px dashed var(--accent); border-radius: 3mm; padding: 4mm 6mm; }
+  .flow h2 { font-size: 11pt; color: var(--primary); margin-bottom: 2mm; }
+  .flow .steps { display: flex; align-items: center; gap: 3mm; font-size: 9.5pt; font-weight: 600; }
+  .flow .steps .s { background: #eef7f3; border-radius: 2mm; padding: 2.5mm 3.5mm; text-align: center; flex: 1; }
+  .flow .steps .a { color: var(--accent); font-size: 12pt; }
+  .flow p { font-size: 9pt; color: var(--muted); margin-top: 2mm; }
+
+  .safety { font-size: 9pt; line-height: 1.7; color: var(--muted); background: #fbf8ef; border-radius: 3mm; padding: 4mm 6mm; }
+  .safety strong { color: var(--text); }
+
+  .foot { margin-top: auto; border-top: 2px solid var(--primary); padding-top: 4mm; display: flex; justify-content: space-between; align-items: flex-end; }
+  .foot .cta { font-size: 12pt; font-weight: 700; color: var(--primary); }
+  .foot .cta small { display: block; font-size: 9pt; font-weight: 400; color: var(--muted); margin-top: 1mm; }
+  .foot .contact { text-align: right; font-size: 10pt; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="head">
+    <div class="sub">地域クリニックのためのAI導入サポート</div>
+    <h1>電話・問診・書類仕事をAIに。<br>先生とスタッフは、診察に集中。</h1>
+    <p>診断・治療のご判断は先生に。その「前後」の事務をAIと私が引き受けます。</p>
+  </div>
+
+  <div class="pain">
+    <h2>こんなことに時間を取られていませんか?</h2>
+    <ul>
+      <li>診察中も鳴り続ける予約・問い合わせの電話</li>
+      <li>問診票の聞き取りとカルテへの転記</li>
+      <li>診察後に山になる紹介状・診断書・意見書</li>
+      <li>レセプト点検と返戻対応</li>
+    </ul>
+  </div>
+
+  <div class="cols">
+    <div class="col">
+      <span class="num">サポート 1</span>
+      <h3>AIサービスの目利きと導入</h3>
+      <p>AI電話応対・Web問診・カルテ下書きAIなど、実績ある既製サービスの中から貴院の規模と予算に合うものを<strong>中立の立場で</strong>選定。契約から設定・開通まで代行します。</p>
+    </div>
+    <div class="col">
+      <span class="num">サポート 2</span>
+      <h3>書類仕事のAI化</h3>
+      <p>走り書きのメモから紹介状・診断書・主治医意見書の下書きを数十秒で作成する仕組みを、<strong>データが学習に使われない法人契約のAI</strong>で構築します。</p>
+    </div>
+    <div class="col">
+      <span class="num">サポート 3</span>
+      <h3>スタッフ定着まで伴走</h3>
+      <p>道具を入れて終わりにしません。受付・事務スタッフさんへの研修と業務フローの整理を行い、<strong>導入後1〜3ヶ月</strong>は現場に寄り添って定着させます。</p>
+    </div>
+  </div>
+
+  <div class="flow">
+    <h2>導入の流れ</h2>
+    <div class="steps">
+      <div class="s">① 業務ヒアリング<br><small>(無料・15分)</small></div><div class="a">→</div>
+      <div class="s">② デモ体験<br><small>(その場で画面を)</small></div><div class="a">→</div>
+      <div class="s">③ 導入プラン提案</div><div class="a">→</div>
+      <div class="s">④ 設定・研修・伴走</div>
+    </div>
+    <p>費用の目安: 利用サービス実費(月数千円〜)+導入・伴走サポート料。事務スタッフ半人分より軽い負担で、それ以上の時間をお返しすることをお約束の基準にしています。</p>
+  </div>
+
+  <div class="safety">
+    <strong>安心のために。</strong> 診察・診断・治療の判断は医師法に基づきすべて先生が行います(AIは事務の下書きまで)。患者様の情報は、医療情報の安全管理ガイドラインに沿い、AIの学習に使われない契約形態のみを採用。導入前に運用ルールを書面でお渡しします。
+  </div>
+
+  <div class="foot">
+    <div class="cta">まずは15分、業務のお困りごとをお聞かせください。<small>売り込みのお電話はいたしません。ご連絡はお気軽に。</small></div>
+    <div class="contact">
+      〇〇 〇〇<br>
+      TEL: 〇〇〇-〇〇〇〇-〇〇〇〇<br>
+      Mail: 〇〇〇〇@〇〇〇
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

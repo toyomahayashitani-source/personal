@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI問診デモ | 来院前スマホ問診 → 医師向けサマリー</title>
+<style>
+  :root {
+    --primary: #1a6b8f;
+    --primary-light: #e8f3f8;
+    --accent: #2ea87e;
+    --bg: #f4f7f9;
+    --card: #ffffff;
+    --text: #24323c;
+    --muted: #6b7c88;
+    --border: #dde6ec;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    background: var(--bg); color: var(--text);
+    display: flex; flex-direction: column; align-items: center;
+    min-height: 100vh; padding: 16px;
+  }
+  .demo-badge {
+    background: #fff3cd; color: #7a5c00; border: 1px solid #e6ce7a;
+    border-radius: 6px; padding: 4px 12px; font-size: 12px; margin-bottom: 12px;
+  }
+  .phone {
+    width: 100%; max-width: 420px; background: var(--card);
+    border-radius: 18px; box-shadow: 0 6px 24px rgba(20,50,70,.12);
+    overflow: hidden; display: flex; flex-direction: column;
+    height: min(78vh, 720px);
+  }
+  header {
+    background: var(--primary); color: #fff; padding: 14px 18px;
+    font-size: 15px; font-weight: 600; display: flex; justify-content: space-between; align-items: center;
+  }
+  header small { font-weight: 400; opacity: .85; font-size: 11px; }
+  #chat { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .msg { max-width: 85%; padding: 10px 14px; border-radius: 14px; font-size: 14px; line-height: 1.55; animation: pop .25s ease; }
+  .bot { background: var(--primary-light); align-self: flex-start; border-bottom-left-radius: 4px; }
+  .user { background: var(--accent); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+  @keyframes pop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  #choices { padding: 12px 16px 16px; display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--border); background: #fbfdfe; }
+  #choices button {
+    border: 1.5px solid var(--primary); color: var(--primary); background: #fff;
+    border-radius: 20px; padding: 9px 16px; font-size: 14px; cursor: pointer;
+    transition: all .15s;
+  }
+  #choices button:hover { background: var(--primary); color: #fff; }
+  #choices button.done-btn { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+  .summary-wrap { width: 100%; max-width: 680px; margin-top: 20px; display: none; }
+  .summary {
+    background: var(--card); border-radius: 14px; box-shadow: 0 6px 24px rgba(20,50,70,.12);
+    padding: 22px 26px;
+  }
+  .summary h2 { font-size: 16px; color: var(--primary); border-bottom: 2px solid var(--primary); padding-bottom: 8px; margin-bottom: 14px; display: flex; justify-content: space-between; align-items: center; }
+  .summary h2 span.tag { font-size: 11px; background: var(--primary); color: #fff; border-radius: 4px; padding: 2px 8px; }
+  .summary dl { display: grid; grid-template-columns: 110px 1fr; gap: 8px 14px; font-size: 14px; line-height: 1.6; }
+  .summary dt { color: var(--muted); font-weight: 600; }
+  .summary dd { white-space: pre-wrap; }
+  .copy-row { margin-top: 16px; display: flex; gap: 10px; }
+  .copy-row button {
+    flex: 1; padding: 11px; border-radius: 8px; border: none; cursor: pointer; font-size: 14px; font-weight: 600;
+  }
+  #copyBtn { background: var(--primary); color: #fff; }
+  #resetBtn { background: #eef2f5; color: var(--text); }
+  .note { font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.6; }
+</style>
+</head>
+<body>
+<div class="demo-badge">デモ画面 — 登場する患者・回答はすべて架空のものです</div>
+
+<div class="phone" id="phoneUI">
+  <header>
+    <div>〇〇内科クリニック<br><small>来院前Web問診(患者さまのスマホ画面)</small></div>
+  </header>
+  <div id="chat"></div>
+  <div id="choices"></div>
+</div>
+
+<div class="summary-wrap" id="summaryWrap">
+  <div class="summary">
+    <h2>医師向けサマリー(電子カルテ貼り付け用) <span class="tag">受付に自動送信</span></h2>
+    <dl id="summaryList"></dl>
+    <div class="copy-row">
+      <button id="copyBtn" onclick="copySummary()">カルテ用テキストをコピー</button>
+      <button id="resetBtn" onclick="location.reload()">最初からやり直す</button>
+    </div>
+    <p class="note">※ このサマリーは患者の回答を整理したものであり、診断を行うものではありません。診断・治療の判断はすべて医師が行います。<br>※ 実運用では問診内容を診療科・院内ルールに合わせて設計します。</p>
+  </div>
+</div>
+
+<script>
+const chat = document.getElementById("chat");
+const choicesEl = document.getElementById("choices");
+const answers = {};
+
+function botSay(text, cb) {
+  const typing = document.createElement("div");
+  typing.className = "msg bot"; typing.textContent = "…";
+  chat.appendChild(typing); chat.scrollTop = chat.scrollHeight;
+  setTimeout(() => { typing.textContent = text; chat.scrollTop = chat.scrollHeight; if (cb) cb(); }, 450);
+}
+function userSay(text) {
+  const m = document.createElement("div");
+  m.className = "msg user"; m.textContent = text;
+  chat.appendChild(m); chat.scrollTop = chat.scrollHeight;
+}
+function showChoices(options, onPick, multi) {
+  choicesEl.innerHTML = "";
+  const picked = new Set();
+  options.forEach(opt => {
+    const b = document.createElement("button");
+    b.textContent = opt;
+    b.onclick = () => {
+      if (!multi) { userSay(opt); choicesEl.innerHTML = ""; onPick(opt); return; }
+      if (picked.has(opt)) { picked.delete(opt); b.style.background = "#fff"; b.style.color = "var(--primary)"; }
+      else { picked.add(opt); b.style.background = "var(--primary)"; b.style.color = "#fff"; }
+    };
+    choicesEl.appendChild(b);
+  });
+  if (multi) {
+    const done = document.createElement("button");
+    done.textContent = "選択を確定"; done.className = "done-btn";
+    done.onclick = () => {
+      const list = picked.size ? [...picked].join("、") : "特になし";
+      userSay(list); choicesEl.innerHTML = ""; onPick(list);
+    };
+    choicesEl.appendChild(done);
+  }
+}
+
+// ---- 問診フロー(発熱ルートを実装したデモ。実運用では診療科別に設計) ----
+function start() {
+  botSay("こんにちは。〇〇内科クリニックの事前問診です。診察がスムーズになるよう、いくつか質問させてください。", () =>
+    botSay("今日はどのような症状で受診されますか?", () =>
+      showChoices(["発熱・のどの痛み", "せき・たん", "腹痛・下痢", "頭痛", "健康診断・その他"], q1)));
+}
+function q1(v) {
+  answers["主訴"] = v;
+  botSay("症状はいつ頃から始まりましたか?", () =>
+    showChoices(["今日から", "昨日から", "2〜3日前から", "1週間以上前から"], q2));
+}
+function q2(v) {
+  answers["発症時期"] = v;
+  botSay("熱を測った場合、最高で何度くらいでしたか?", () =>
+    showChoices(["37℃台", "38℃台", "39℃以上", "測っていない"], q3));
+}
+function q3(v) {
+  answers["最高体温"] = v;
+  botSay("他に当てはまる症状があればすべて選んでください。", () =>
+    showChoices(["のどの痛み", "せき", "鼻水", "関節の痛み", "吐き気", "息苦しさ"], q4, true));
+}
+function q4(v) {
+  answers["随伴症状"] = v;
+  botSay("周囲に同じような症状の方はいますか?(ご家族・職場など)", () =>
+    showChoices(["家族にいる", "職場・学校にいる", "いない", "わからない"], q5));
+}
+function q5(v) {
+  answers["周囲の状況"] = v;
+  botSay("現在、毎日飲んでいるお薬はありますか?", () =>
+    showChoices(["ない", "ある(お薬手帳を持参します)", "ある(手帳なし)"], q6));
+}
+function q6(v) {
+  answers["内服薬"] = v;
+  botSay("薬や食べ物のアレルギーはありますか?", () =>
+    showChoices(["ない", "ある", "わからない"], q7));
+}
+function q7(v) {
+  answers["アレルギー"] = v;
+  botSay("ありがとうございました。問診は以上です。受付に内容を送信しました。来院時は受付で「Web問診済み」とお伝えください。", showSummary);
+}
+
+function showSummary() {
+  choicesEl.innerHTML = "";
+  const dl = document.getElementById("summaryList");
+  const rows = {
+    "主訴": answers["主訴"],
+    "現病歴": `${answers["発症時期"]}の${answers["主訴"]}。最高体温は${answers["最高体温"]}。`,
+    "随伴症状": answers["随伴症状"],
+    "周囲の流行": answers["周囲の状況"],
+    "内服薬": answers["内服薬"],
+    "アレルギー": answers["アレルギー"],
+    "受付メモ": "Web問診済み。診察前の検温・必要に応じた検査準備をお願いします。"
+  };
+  for (const [k, v] of Object.entries(rows)) {
+    dl.insertAdjacentHTML("beforeend", `<dt>${k}</dt><dd>${v}</dd>`);
+  }
+  document.getElementById("summaryWrap").style.display = "block";
+  document.getElementById("summaryWrap").scrollIntoView({ behavior: "smooth" });
+}
+
+function copySummary() {
+  const dl = document.getElementById("summaryList");
+  let text = "【Web問診サマリー】\n";
+  const dts = dl.querySelectorAll("dt"), dds = dl.querySelectorAll("dd");
+  dts.forEach((dt, i) => { text += `${dt.textContent}: ${dds[i].textContent}\n`; });
+  navigator.clipboard.writeText(text).then(() => {
+    document.getElementById("copyBtn").textContent = "コピーしました ✓";
+    setTimeout(() => document.getElementById("copyBtn").textContent = "カルテ用テキストをコピー", 1500);
+  });
+}
+
+start();
+</script>
+</body>
+</html>

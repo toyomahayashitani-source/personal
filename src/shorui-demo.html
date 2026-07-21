@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>書類ドラフトAI デモ | 走り書きメモ → 完成文書</title>
+<style>
+  :root {
+    --primary: #1a6b8f;
+    --accent: #2ea87e;
+    --bg: #f4f7f9;
+    --card: #ffffff;
+    --text: #24323c;
+    --muted: #6b7c88;
+    --border: #dde6ec;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+    background: var(--bg); color: var(--text); padding: 20px; max-width: 1100px; margin: 0 auto;
+  }
+  .demo-badge {
+    background: #fff3cd; color: #7a5c00; border: 1px solid #e6ce7a;
+    border-radius: 6px; padding: 4px 12px; font-size: 12px; display: inline-block; margin-bottom: 14px;
+  }
+  h1 { font-size: 20px; color: var(--primary); margin-bottom: 4px; }
+  .lead { font-size: 13px; color: var(--muted); margin-bottom: 18px; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+  .tabs button {
+    padding: 10px 20px; border-radius: 8px 8px 0 0; border: 1px solid var(--border); border-bottom: none;
+    background: #e9eff3; color: var(--muted); font-size: 14px; font-weight: 600; cursor: pointer;
+  }
+  .tabs button.active { background: var(--card); color: var(--primary); border-top: 3px solid var(--primary); }
+  .panel { display: none; gap: 16px; grid-template-columns: 1fr 1fr; }
+  .panel.active { display: grid; }
+  @media (max-width: 800px) { .panel.active { grid-template-columns: 1fr; } }
+  .box { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; }
+  .box h3 { font-size: 13px; padding: 10px 14px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .box.input h3 { background: #fdf6ec; color: #8a6d1f; }
+  .box.output h3 { background: #ecf7f2; color: #1d7a58; }
+  .box .body { padding: 16px; font-size: 13.5px; line-height: 1.8; white-space: pre-wrap; flex: 1; }
+  .box.input .body { font-family: "Yu Gothic", monospace; color: #555; background: #fffdf8; }
+  .gen-row { grid-column: 1 / -1; text-align: center; }
+  @media (max-width: 800px) { .gen-row { grid-column: 1; } }
+  .gen-row button {
+    background: var(--accent); color: #fff; border: none; border-radius: 24px;
+    padding: 12px 34px; font-size: 15px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 14px rgba(46,168,126,.35); transition: transform .15s;
+  }
+  .gen-row button:hover { transform: translateY(-2px); }
+  .gen-row .time { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .cursor { display: inline-block; width: 8px; background: var(--accent); animation: blink .8s infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+  .footnote { font-size: 12px; color: var(--muted); margin-top: 18px; line-height: 1.7; }
+</style>
+</head>
+<body>
+<div class="demo-badge">デモ画面 — 患者情報はすべて架空です。実運用は学習に使われない法人契約のAI環境で行います。</div>
+<h1>書類ドラフトAI — 走り書きメモから、そのまま使える下書きへ</h1>
+<p class="lead">医師が診察の合間に書いたメモを貼り付けるだけ。紹介状・診断書・主治医意見書のドラフトが数十秒で完成します。最終確認と署名は医師が行います。</p>
+
+<div class="tabs" id="tabs"></div>
+<div id="panels"></div>
+
+<p class="footnote">
+※ AIが作るのは「下書き」です。内容の確認・修正・交付の判断は必ず医師が行います(最終責任は医師)。<br>
+※ 手書きメモの誤字・略語(HT、DM、Adm等)も文脈から正式表記に展開します。
+</p>
+
+<script>
+const DOCS = [
+  {
+    name: "紹介状(診療情報提供書)",
+    input: `<医師の走り書きメモ>
+山田花子 78F HT DM(A1c 7.2) 通院中
+2w前から労作時息切れ 増悪
+下腿浮腫+ 心雑音? BNP 890
+胸部Xp:CTR 58% 肺うっ血疑い
+心不全精査目的 総合病院循環器へ紹介
+内服:アムロジピン5 メトホルミン500x2`,
+    output: `診療情報提供書
+
+〇〇総合病院 循環器内科 御侍史
+
+患者:山田 花子 様(78歳・女性)
+傷病名:心不全疑い、高血圧症、2型糖尿病
+
+拝啓 時下ますますご清栄のこととお慶び申し上げます。
+平素より大変お世話になっております。
+
+上記患者様は、高血圧症および2型糖尿病(直近HbA1c 7.2%)にて当院通院中の方です。約2週間前より労作時の息切れが出現し、徐々に増悪を認めております。診察上、両下腿浮腫および心雑音を聴取し、BNP 890 pg/mLと高値、胸部X線ではCTR 58%と心拡大および肺うっ血が疑われる所見でした。
+
+心不全の精査・加療が必要と考え、貴科へご紹介申し上げます。ご多忙のところ恐縮ですが、ご高診のほどよろしくお願い申し上げます。
+
+【現在の処方】
+・アムロジピン 5mg 1錠 分1 朝食後
+・メトホルミン 500mg 2錠 分2 朝夕食後
+
+敬具
+〇〇内科クリニック 院長 〇〇 〇〇`
+  },
+  {
+    name: "診断書",
+    input: `<医師の走り書きメモ>
+佐藤太郎 45M
+インフルA(+) 1/20発症
+発熱39℃ 関節痛
+タミフル処方
+1/20-1/25 自宅療養必要 会社提出用`,
+    output: `診断書
+
+氏名:佐藤 太郎 様(45歳・男性)
+
+診断名:インフルエンザA型感染症
+
+上記の者は、2026年1月20日に発熱(39℃)および関節痛にて当院を受診し、迅速検査によりインフルエンザA型感染症と診断いたしました。抗インフルエンザ薬による治療を開始しております。
+
+感染拡大防止および療養のため、2026年1月20日から2026年1月25日まで自宅療養を要すると判断いたします。
+
+上記のとおり診断いたします。
+
+2026年1月20日
+〇〇内科クリニック
+院長 〇〇 〇〇 ㊞`
+  },
+  {
+    name: "主治医意見書(要介護認定)",
+    input: `<医師の走り書きメモ>
+鈴木トメ 88F 独居
+Dx:アルツハイマー型認知症 骨粗鬆症 変形性膝関節症
+HDS-R 14点 短期記憶低下 服薬管理×
+屋内伝い歩き 屋外は杖+見守り
+転倒歴 昨年2回
+訪問介護週2利用中 デイ追加希望`,
+    output: `主治医意見書(記載例・抜粋)
+
+申請者:鈴木 トメ 様(88歳・女性・独居)
+
+1. 傷病に関する意見
+診断名:アルツハイマー型認知症、骨粗鬆症、変形性膝関節症
+症状としての安定性:不安定(認知機能は緩徐に進行)
+
+2. 心身の状態に関する意見
+HDS-R 14点。短期記憶の低下が顕著であり、服薬の自己管理は困難。屋内は伝い歩きで移動可能だが、屋外は杖歩行に加え見守りを要する。昨年2回の転倒歴あり、骨粗鬆症を背景とした骨折リスクが高い。
+
+3. 生活機能とサービスに関する意見
+独居であり、服薬管理・金銭管理・調理に支援を要する。現在訪問介護を週2回利用中。転倒予防と社会的交流の維持のため、通所介護(デイサービス)の追加利用が望ましい。
+
+4. 特記事項
+独居のため、症状悪化時の早期発見体制としてケアマネジャーとの連携を密にされたい。`
+  }
+];
+
+const tabs = document.getElementById("tabs");
+const panels = document.getElementById("panels");
+
+DOCS.forEach((doc, i) => {
+  const tb = document.createElement("button");
+  tb.textContent = doc.name;
+  tb.onclick = () => selectTab(i);
+  tabs.appendChild(tb);
+
+  const p = document.createElement("div");
+  p.className = "panel";
+  p.innerHTML = `
+    <div class="box input">
+      <h3>入力: 医師のメモ(そのまま貼り付け)</h3>
+      <div class="body">${doc.input}</div>
+    </div>
+    <div class="box output">
+      <h3>出力: AIが整えたドラフト <span id="stamp${i}" style="font-weight:400;color:var(--muted)"></span></h3>
+      <div class="body" id="out${i}"><span style="color:var(--muted)">「ドラフト生成」を押してください</span></div>
+    </div>
+    <div class="gen-row">
+      <button onclick="generate(${i})">▶ ドラフト生成</button>
+      <div class="time">実際の生成時間: 10〜30秒程度</div>
+    </div>`;
+  panels.appendChild(p);
+});
+
+function selectTab(i) {
+  [...tabs.children].forEach((b, j) => b.classList.toggle("active", i === j));
+  [...panels.children].forEach((p, j) => p.classList.toggle("active", i === j));
+}
+
+let timers = {};
+function generate(i) {
+  const out = document.getElementById("out" + i);
+  const text = DOCS[i].output;
+  clearInterval(timers[i]);
+  out.innerHTML = "";
+  const cur = document.createElement("span");
+  cur.className = "cursor"; cur.innerHTML = "&nbsp;";
+  out.appendChild(cur);
+  let pos = 0;
+  timers[i] = setInterval(() => {
+    pos += 3;
+    out.firstChild ? out.innerHTML = "" : null;
+    out.textContent = text.slice(0, pos);
+    out.appendChild(cur);
+    if (pos >= text.length) {
+      clearInterval(timers[i]);
+      cur.remove();
+      document.getElementById("stamp" + i).textContent = "生成完了 — 医師の確認・修正を経て交付";
+    }
+  }, 12);
+}
+
+selectTab(0);
+</script>
+</body>
+</html>
