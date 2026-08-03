@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北摂AIサービス | クリニックのAI導入伴走パートナー</title>
+<meta name="description" content="北摂エリア(豊中・吹田・箕面・池田・高槻・茨木など)のクリニック向けに、AI電話・Web問診・書類作成AIの選定から導入、スタッフ定着までを一括サポートします。">
+<style>
+  :root {
+    --primary: #1a6b8f;
+    --primary-dark: #114c67;
+    --primary-light: #e8f3f8;
+    --accent: #2ea87e;
+    --bg: #ffffff;
+    --bg-alt: #f4f7f9;
+    --text: #24323c;
+    --muted: #5f707c;
+    --border: #dde6ec;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif; color: var(--text); line-height: 1.7; }
+  section { padding: 64px 20px; }
+  .inner { max-width: 960px; margin: 0 auto; }
+  h2 { font-size: 26px; color: var(--primary); text-align: center; margin-bottom: 8px; }
+  .h2-sub { text-align: center; color: var(--muted); font-size: 14px; margin-bottom: 36px; }
+
+  /* header */
+  header {
+    position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.95);
+    border-bottom: 1px solid var(--border); backdrop-filter: blur(6px);
+  }
+  .nav { max-width: 960px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; }
+  .logo { font-size: 18px; font-weight: 800; color: var(--primary); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 22px; font-size: 14px; }
+  .nav-links a { color: var(--text); text-decoration: none; }
+  .nav-links a:hover { color: var(--primary); }
+  .nav-cta {
+    background: var(--accent); color: #fff !important; padding: 8px 18px; border-radius: 20px; font-weight: 700;
+  }
+  @media (max-width: 720px) { .nav-links a:not(.nav-cta) { display: none; } }
+
+  /* hero */
+  .hero { background: linear-gradient(160deg, var(--primary-light) 0%, #fff 70%); padding: 84px 20px 72px; }
+  .hero .inner { text-align: center; }
+  .hero .area-tag {
+    display: inline-block; background: var(--primary); color: #fff; font-size: 13px;
+    border-radius: 20px; padding: 4px 16px; margin-bottom: 18px; letter-spacing: .05em;
+  }
+  .hero h1 { font-size: clamp(26px, 5vw, 40px); color: var(--primary-dark); line-height: 1.45; margin-bottom: 18px; }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p { font-size: 16px; color: var(--muted); margin-bottom: 30px; }
+  .hero .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn { display: inline-block; text-decoration: none; border-radius: 28px; padding: 14px 34px; font-size: 16px; font-weight: 700; transition: transform .15s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 6px 18px rgba(46,168,126,.35); }
+  .btn-ghost { border: 2px solid var(--primary); color: var(--primary); }
+
+  /* pain */
+  .pain { background: var(--bg-alt); }
+  .pain-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+  .pain-card { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid var(--border); font-size: 14.5px; }
+  .pain-card b { color: var(--primary); display: block; margin-bottom: 6px; font-size: 15px; }
+  .pain-note { text-align: center; margin-top: 26px; font-size: 15px; }
+  .pain-note strong { color: var(--accent); }
+
+  /* services */
+  .svc-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+  .svc { border: 1px solid var(--border); border-radius: 14px; padding: 26px 24px; position: relative; background: #fff; }
+  .svc .num {
+    position: absolute; top: -14px; left: 20px; background: var(--accent); color: #fff;
+    font-size: 12px; font-weight: 700; border-radius: 14px; padding: 3px 14px;
+  }
+  .svc h3 { color: var(--primary); font-size: 17px; margin: 6px 0 10px; }
+  .svc p { font-size: 14px; color: var(--text); }
+  .svc p strong { color: var(--primary-dark); }
+
+  /* flow */
+  .flow { background: var(--bg-alt); }
+  .flow-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+  .step { background: #fff; border-radius: 12px; padding: 20px 18px; border-top: 4px solid var(--accent); }
+  .step .no { color: var(--accent); font-weight: 800; font-size: 13px; }
+  .step h3 { font-size: 15.5px; color: var(--primary); margin: 4px 0 8px; }
+  .step p { font-size: 13px; color: var(--muted); }
+
+  /* price */
+  .price-box { max-width: 640px; margin: 0 auto; border: 2px solid var(--primary); border-radius: 14px; overflow: hidden; }
+  .price-box table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  .price-box th, .price-box td { padding: 14px 18px; text-align: left; border-bottom: 1px solid var(--border); }
+  .price-box th { background: var(--primary-light); color: var(--primary-dark); width: 40%; font-size: 14px; }
+  .price-note { text-align: center; font-size: 13px; color: var(--muted); margin-top: 16px; }
+  .price-promise { text-align: center; font-size: 16px; margin-top: 22px; }
+  .price-promise strong { color: var(--accent); font-size: 18px; }
+
+  /* trust */
+  .trust { background: var(--bg-alt); }
+  .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .trust-card { background: #fff; border-radius: 12px; padding: 22px; border: 1px solid var(--border); font-size: 14px; }
+  .trust-card b { color: var(--primary); display: block; margin-bottom: 8px; font-size: 15px; }
+
+  /* area */
+  .area-list { text-align: center; font-size: 15px; }
+  .area-list .cities { font-size: 17px; font-weight: 700; color: var(--primary); margin: 10px 0; }
+
+  /* contact */
+  .contact { background: var(--primary); color: #fff; text-align: center; }
+  .contact h2 { color: #fff; }
+  .contact p { max-width: 560px; margin: 0 auto 26px; font-size: 15px; }
+  .contact .btn-primary { background: #fff; color: var(--primary); box-shadow: 0 6px 18px rgba(0,0,0,.2); }
+  .contact .tel { margin-top: 22px; font-size: 14px; opacity: .9; }
+
+  footer { background: var(--primary-dark); color: #cfe3ee; text-align: center; padding: 26px 20px; font-size: 12.5px; }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a class="logo" href="#">北摂<span>AI</span>サービス</a>
+    <div class="nav-links">
+      <a href="#services">サービス</a>
+      <a href="#flow">導入の流れ</a>
+      <a href="#price">料金</a>
+      <a href="#trust">安心への取り組み</a>
+      <a class="nav-cta" href="#contact">お問い合わせ</a>
+    </div>
+  </nav>
+</header>
+
+<div class="hero">
+  <div class="inner">
+    <div class="area-tag">北摂エリアのクリニック向け</div>
+    <h1>電話・問診・書類仕事はAIへ。<br>先生とスタッフは、<em>診察に集中</em>。</h1>
+    <p>AIサービスの選定から導入、スタッフの皆様への定着まで。<br>地域密着で「丸ごと」お手伝いする、クリニック専門のAI導入パートナーです。</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#contact">無料ヒアリングを申し込む(15分)</a>
+      <a class="btn btn-ghost" href="#services">サービスを見る</a>
+    </div>
+  </div>
+</div>
+
+<section class="pain">
+  <div class="inner">
+    <h2>こんなお悩みはありませんか?</h2>
+    <p class="h2-sub">多くのクリニックで、診察以外の業務が先生とスタッフの時間を奪っています</p>
+    <div class="pain-grid">
+      <div class="pain-card"><b>鳴り止まない電話</b>診察中も予約・変更・問い合わせの電話が続き、受付が対応に追われている</div>
+      <div class="pain-card"><b>問診の転記作業</b>紙の問診票を聞き直し、カルテへ手で打ち直す二度手間が発生している</div>
+      <div class="pain-card"><b>書類仕事の山</b>紹介状・診断書・主治医意見書が診察後にたまり、残業の原因になっている</div>
+      <div class="pain-card"><b>人手不足</b>受付・医療事務の採用が難しく、今のスタッフの負担が増え続けている</div>
+    </div>
+    <p class="pain-note">こうした「診察の前後」の業務は、いまのAIで<strong>大部分を自動化できます</strong>。<br>診断・治療のご判断は先生に。その前後を、私たちが軽くします。</p>
+  </div>
+</section>
+
+<section id="services">
+  <div class="inner">
+    <h2>3つのサービス</h2>
+    <p class="h2-sub">道具を売るのではなく、業務が実際に軽くなるまでを請け負います</p>
+    <div class="svc-grid">
+      <div class="svc">
+        <span class="num">SERVICE 1</span>
+        <h3>AIサービスの目利きと導入代行</h3>
+        <p>AI電話応対・Web問診・カルテ下書きAI・自動精算機など、実績ある既製サービスの中から、貴院の診療科・規模・予算に合う組み合わせを<strong>特定ベンダーに偏らない中立の立場</strong>で選定。契約から設定・開通までを代行します。</p>
+      </div>
+      <div class="svc">
+        <span class="num">SERVICE 2</span>
+        <h3>書類仕事のAI化</h3>
+        <p>走り書きのメモから、紹介状・診断書・主治医意見書の下書きを数十秒で作成する仕組みを構築します。<strong>データがAIの学習に使われない法人契約</strong>のみを採用し、最終確認・交付の判断は必ず医師が行う運用を徹底します。</p>
+      </div>
+      <div class="svc">
+        <span class="num">SERVICE 3</span>
+        <h3>スタッフ定着まで伴走</h3>
+        <p>導入失敗の最大原因は、道具ではなく運用の変化への戸惑いです。受付・事務スタッフの皆様への研修、業務フローの整理を行い、<strong>導入後1〜3ヶ月は現場に寄り添って</strong>定着まで見届けます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="flow" id="flow">
+  <div class="inner">
+    <h2>導入の流れ</h2>
+    <p class="h2-sub">まずは15分のヒアリングから。その場で実際の画面をご覧いただけます</p>
+    <div class="flow-steps">
+      <div class="step"><div class="no">STEP 1</div><h3>無料ヒアリング</h3><p>いま一番手間のかかっている業務を15分ほどお聞かせください。訪問・オンラインどちらでも。</p></div>
+      <div class="step"><div class="no">STEP 2</div><h3>デモ体験</h3><p>AI問診や書類ドラフト作成の実際の画面を、その場でお見せします。</p></div>
+      <div class="step"><div class="no">STEP 3</div><h3>導入プランご提案</h3><p>費用対効果の試算つきで、貴院に合う組み合わせをご提案。合わなければ断っていただいて構いません。</p></div>
+      <div class="step"><div class="no">STEP 4</div><h3>設定・研修・伴走</h3><p>契約・設定・スタッフ研修を実施。導入後も効果を数字で確認しながら定着させます。</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="price">
+  <div class="inner">
+    <h2>料金の目安</h2>
+    <p class="h2-sub">ヒアリングの上、正式なお見積りをご提示します</p>
+    <div class="price-box">
+      <table>
+        <tr><th>無料ヒアリング・デモ</th><td>0円</td></tr>
+        <tr><th>導入設計・設定・開通(スポット)</th><td>20万円〜(導入するサービス数による)</td></tr>
+        <tr><th>運用伴走サポート(月額)</th><td>3万円〜</td></tr>
+        <tr><th>AIサービス利用料(実費)</th><td>月数千円〜(貴院とサービス提供元の直接契約)</td></tr>
+      </table>
+    </div>
+    <p class="price-promise">お約束の基準: <strong>事務スタッフ半人分より軽い負担で、それ以上の時間をお返しする</strong>こと。</p>
+    <p class="price-note">※ 効果が数字で見えなければ、伴走契約はいつでも解約いただけます。</p>
+  </div>
+</section>
+
+<section class="trust" id="trust">
+  <div class="inner">
+    <h2>安心への取り組み</h2>
+    <p class="h2-sub">医療機関でAIを使うために守るべきことを、設計段階から守ります</p>
+    <div class="trust-grid">
+      <div class="trust-card"><b>診断はAIに任せません</b>医師法に基づき、診察・診断・治療の判断はすべて医師が行います。AIが担うのは予約・問診の整理・書類の下書きなど、診察の「前後」の事務作業だけです。</div>
+      <div class="trust-card"><b>患者情報の取り扱い</b>医療情報システムの安全管理に関するガイドライン(いわゆる3省2ガイドライン)に沿った運用を設計。入力データがAIの学習に使われない契約形態のサービスのみを採用します。</div>
+      <div class="trust-card"><b>運用ルールを書面で</b>「何をAIに任せ、何を人が確認するか」を導入前に文書化してお渡しします。スタッフの誰が見ても迷わない状態にしてから運用を始めます。</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="inner area-list">
+    <h2>対応エリア</h2>
+    <p class="h2-sub">地域密着・訪問対応いたします</p>
+    <p class="cities">豊中・吹田・箕面・池田・高槻・茨木・摂津・島本 ほか北摂エリア全域</p>
+    <p>オンラインでのご相談は地域を問わずお受けしています。</p>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="inner">
+    <h2>お問い合わせ</h2>
+    <p>「まず話だけ聞きたい」で構いません。15分のヒアリングでは売り込みをせず、貴院の業務のお困りごとを伺い、その場でデモをご覧いただきます。</p>
+    <a class="btn btn-primary" href="mailto:info@example.com?subject=%E7%84%A1%E6%96%99%E3%83%92%E3%82%A2%E3%83%AA%E3%83%B3%E3%82%B0%E5%B8%8C%E6%9C%9B">メールで問い合わせる</a>
+    <p class="tel">お電話: 〇〇〇-〇〇〇〇-〇〇〇〇(平日 9:00〜18:00)<br>※ こちらから営業のお電話をおかけすることはありません。</p>
+  </div>
+</section>
+
+<footer>
+  北摂AIサービス(屋号) | 代表: 〇〇 〇〇<br>
+  © 2026 Hokusetsu AI Service
+</footer>
+
+</body>
+</html>
