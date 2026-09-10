@@ -1,0 +1,1041 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>鶏小屋 骨組み図</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Roboto+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#F2F1EB;
+  --paper-2:#E8E6DD;
+  --shade:#DCD9CD;
+  --ink:#1D211E;
+  --ink-2:#585F59;
+  --ink-3:#8B918A;
+  --rule:#D2CFC3;
+  --shu:#B34328;
+  --ai:#2F5468;
+  --shu-soft:#B3432815;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#141715;
+    --paper-2:#1C201D;
+    --shade:#252A26;
+    --ink:#E9E7DE;
+    --ink-2:#A4A99F;
+    --ink-3:#787E77;
+    --rule:#2D322E;
+    --shu:#E37A5F;
+    --ai:#82AAC0;
+    --shu-soft:#E37A5F1F;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#141715;
+  --paper-2:#1C201D;
+  --shade:#252A26;
+  --ink:#E9E7DE;
+  --ink-2:#A4A99F;
+  --ink-3:#787E77;
+  --rule:#2D322E;
+  --shu:#E37A5F;
+  --ai:#82AAC0;
+  --shu-soft:#E37A5F1F;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN","Yu Gothic",system-ui,sans-serif;
+  font-size:15px;
+  line-height:1.85;
+  -webkit-font-smoothing:antialiased;
+}
+.sheet{max-width:900px;margin:0 auto;padding:36px 22px 90px}
+
+.titleblock{
+  border-top:2.5px solid var(--ink);
+  border-bottom:1px solid var(--rule);
+  padding:18px 0 16px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:20px 28px;
+  align-items:end;
+}
+.titleblock h1{
+  font-family:"Shippori Mincho",serif;
+  font-weight:700;
+  font-size:clamp(28px,5.4vw,42px);
+  line-height:1.2;
+  letter-spacing:.02em;
+  margin:0;
+  text-wrap:balance;
+}
+.titleblock .sub{color:var(--ink-2);font-size:13.5px;margin-top:6px}
+.stamp{
+  font-family:"Roboto Mono",monospace;
+  font-size:11px;
+  letter-spacing:.06em;
+  color:var(--ink-2);
+  text-align:right;
+  line-height:1.9;
+  white-space:nowrap;
+}
+.stamp b{color:var(--ink);font-weight:500}
+
+h2{
+  font-family:"Shippori Mincho",serif;
+  font-size:22px;font-weight:700;letter-spacing:.03em;
+  margin:0;text-wrap:balance;
+}
+h3{font-size:15px;font-weight:700;margin:0;letter-spacing:.02em}
+section{margin-top:52px}
+.sechead{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--rule);padding-bottom:9px;margin-bottom:22px}
+.sechead .num{
+  font-family:"Roboto Mono",monospace;font-size:11px;letter-spacing:.14em;
+  color:var(--shu);flex:none;
+}
+p{margin:0 0 14px;max-width:62ch}
+p:last-child{margin-bottom:0}
+strong{font-weight:700}
+.mono{font-family:"Roboto Mono",monospace;font-variant-numeric:tabular-nums}
+
+.note{
+  background:var(--paper-2);
+  border:1px solid var(--rule);
+  padding:18px 20px;
+  display:flex;flex-direction:column;gap:9px;
+}
+.note .lbl{
+  font-family:"Roboto Mono",monospace;font-size:10.5px;letter-spacing:.16em;
+  color:var(--shu);
+}
+.note p{margin:0}
+
+figure{margin:0;border:1px solid var(--rule);background:var(--paper-2)}
+figure .frame{padding:14px 12px 4px;overflow-x:auto}
+figure svg{display:block;width:100%;max-width:100%;height:auto;color:var(--ink)}
+figcaption{
+  border-top:1px solid var(--rule);
+  padding:11px 16px;
+  font-size:12.5px;line-height:1.7;color:var(--ink-2);
+}
+figcaption b{color:var(--ink);font-weight:500}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--rule)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:520px}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{
+  background:var(--shade);
+  font-size:11px;letter-spacing:.1em;font-weight:700;color:var(--ink-2);
+  border-bottom:1px solid var(--rule);white-space:nowrap;
+}
+tbody tr:last-child td{border-bottom:none}
+td.n,th.n{font-family:"Roboto Mono",monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.key{font-family:"Roboto Mono",monospace;color:var(--shu);font-weight:500;white-space:nowrap}
+tbody tr:nth-child(even){background:var(--shu-soft)}
+
+ol.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;counter-reset:s}
+ol.steps li{
+  counter-increment:s;
+  display:grid;grid-template-columns:44px 1fr;gap:0 16px;
+  padding:15px 0;border-bottom:1px dashed var(--rule);
+}
+ol.steps li:last-child{border-bottom:none}
+ol.steps li::before{
+  content:counter(s,decimal-leading-zero);
+  font-family:"Roboto Mono",monospace;font-size:12px;color:var(--shu);
+  padding-top:3px;letter-spacing:.05em;
+}
+ol.steps h3{margin-bottom:3px}
+ol.steps p{font-size:13.5px;color:var(--ink-2);margin:0}
+
+dl.spec{margin:0;display:grid;grid-template-columns:auto 1fr;gap:0}
+dl.spec dt{
+  padding:8px 16px 8px 0;border-bottom:1px solid var(--rule);
+  font-size:13px;color:var(--ink-2);white-space:nowrap;
+}
+dl.spec dd{
+  margin:0;padding:8px 0;border-bottom:1px solid var(--rule);
+  font-family:"Roboto Mono",monospace;font-variant-numeric:tabular-nums;font-size:13.5px;
+}
+dl.spec dd .u{font-family:"Zen Kaku Gothic New",sans-serif;color:var(--ink-2);font-size:12.5px}
+
+ul.check{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+ul.check li{display:grid;grid-template-columns:16px 1fr;gap:12px;font-size:14px}
+ul.check li::before{
+  content:"";width:11px;height:11px;margin-top:7px;
+  border:1.5px solid var(--shu);
+}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:26px}
+.card{border-top:2px solid var(--ink);padding-top:13px;display:flex;flex-direction:column;gap:7px}
+.card p{font-size:13.5px;color:var(--ink-2);margin:0}
+
+footer{margin-top:64px;border-top:1px solid var(--rule);padding-top:16px;font-size:12px;color:var(--ink-3)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="sheet">
+
+<header class="titleblock">
+  <div>
+    <h1>鶏小屋 骨組み図</h1>
+    <div class="sub">幅190 × 奥行100 × 室内高167／片流れ屋根・柱90角・自動扉つき・4羽</div>
+  </div>
+  <div class="stamp">
+    単位 <b>cm</b>（材の断面のみ mm）<br>
+    基準 <b>GL</b>=地面／<b>FL</b>=土台上端=GL+15<br>
+    作成 <b>2026-09-02</b> ／ 縮尺 NTS
+  </div>
+</header>
+
+<section style="margin-top:30px">
+  <div class="note">
+    <span class="lbl">確定事項</span>
+    <p><strong>167 ＝ 室内の有効高（土台上端から桁の下端まで）で確定。</strong>柱を伸ばして稼ぐので、地面からの全高は約195cmになります。扉は右ベイの右吊元・外開き、床は土のまま、飼育は4羽。</p>
+    <p><strong>ひとつだけ確認を。</strong>有効高167は、身長167cmの人だと頭がぎりぎり触れます。かがまずに入るには<span class="mono">身長＋5〜10cm</span>が目安なので、足りなければ<strong>前柱と後柱を同じだけ伸ばすだけ</strong>で済みます。勾配も波板も木取りの本数も変わりません（2m材から取れるので前柱175cmまでは同じ買い方でいけます）。</p>
+    <p>奥側の有効高は150cmです。奥行が100cmになって<strong>内寸82cm＝人が一歩入れる奥行</strong>になったので、前回より「奥に立つ」場面は増えます。とはいえ扉が床まで開くので、掃除も集卵も前から手が届きます。奥で真っすぐ立つのは無理、という理解で問題ありません。</p>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="num">SPEC</span><h2>主要寸法</h2></div>
+  <div class="cols">
+    <dl class="spec">
+      <dt>外形（柱の外面）</dt><dd>190 × 100</dd>
+      <dt>室内有効高（前側）</dt><dd>167</dd>
+      <dt>室内有効高（後側）</dt><dd>150</dd>
+      <dt>前柱の長さ</dt><dd>167 <span class="u">（FLから）</span></dd>
+      <dt>後柱の長さ</dt><dd>150 <span class="u">（FLから）</span></dd>
+      <dt>柱の心々間隔</dt><dd>90.5 × 2</dd>
+      <dt>室内の床面積</dt><dd>約1.41 <span class="u">㎡（172×82）</span></dd>
+    </dl>
+    <dl class="spec">
+      <dt>屋根勾配</dt><dd>約2.1寸 <span class="u">（11.7°・奥下がり）</span></dd>
+      <dt>桁天端の高低差</dt><dd>17 <span class="u">（当たり芯間82）</span></dd>
+      <dt>屋根の水平長</dt><dd>118 <span class="u">（前出10／後出8）</span></dd>
+      <dt>波板の必要長さ</dt><dd>121 <span class="u">＝4尺(1210mm)ぴったり</span></dd>
+      <dt>屋根の幅</dt><dd>206 <span class="u">（左右8ずつ出す）</span></dd>
+      <dt>全高（前軒先・GLから）</dt><dd>約195</dd>
+      <dt>飼育羽数</dt><dd>4 <span class="u">羽（就寝・産卵用）</span></dd>
+    </dl>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="num">FIG 1</span><h2>平面図</h2></div>
+  <figure>
+    <div class="frame">
+      <svg viewBox="0 0 520 470" role="img" aria-label="鶏小屋の平面図。幅190奥行100に90角の柱6本、正面右に人用の扉、正面左に外付け産卵箱と鶏用の自動扉とスロープ、室内に止まり木を配置。">
+        <defs>
+          <marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L10,5 L0,9 z" fill="var(--shu)"/>
+          </marker>
+        </defs>
+
+        <rect x="44" y="94" width="412" height="236" fill="none" stroke="var(--ink-3)" stroke-width="1" stroke-dasharray="7 4"/>
+        <text x="170" y="89" font-size="10.5" fill="var(--ink-3)" text-anchor="middle">屋根外形 206×118</text>
+
+        <g stroke="var(--ink-3)" stroke-width="1" stroke-dasharray="3 3" opacity=".85">
+          <line x1="64.5" y1="94" x2="64.5" y2="330"/>
+          <line x1="138.7" y1="94" x2="138.7" y2="330"/>
+          <line x1="212.9" y1="94" x2="212.9" y2="330"/>
+          <line x1="287.1" y1="94" x2="287.1" y2="330"/>
+          <line x1="361.3" y1="94" x2="361.3" y2="330"/>
+          <line x1="435.5" y1="94" x2="435.5" y2="330"/>
+        </g>
+
+        <g stroke="currentColor" stroke-width="1.6" fill="none">
+          <line x1="60" y1="110" x2="440" y2="110"/>
+          <line x1="60" y1="110" x2="60" y2="310"/>
+          <line x1="440" y1="110" x2="440" y2="310"/>
+          <line x1="60" y1="310" x2="180" y2="310"/>
+          <line x1="228" y1="310" x2="259" y2="310"/>
+          <line x1="431" y1="310" x2="440" y2="310"/>
+        </g>
+
+        <g fill="var(--shade)" stroke="currentColor" stroke-width="1.4">
+          <rect x="60" y="292" width="18" height="18"/>
+          <rect x="241" y="292" width="18" height="18"/>
+          <rect x="422" y="292" width="18" height="18"/>
+          <rect x="60" y="110" width="18" height="18"/>
+          <rect x="241" y="110" width="18" height="18"/>
+          <rect x="422" y="110" width="18" height="18"/>
+        </g>
+
+        <rect x="84" y="240" width="80" height="70" fill="none" stroke="var(--ai)" stroke-width="1.6"/>
+        <text x="124" y="266" font-size="10" fill="var(--ai)" text-anchor="middle">産卵箱（室内）</text>
+        <text x="124" y="280" font-size="10" fill="var(--ai)" text-anchor="middle">40W×35D</text>
+        <text x="124" y="294" font-size="9" fill="var(--ai)" text-anchor="middle">FL+35に浮かせる</text>
+        <line x1="84" y1="310" x2="164" y2="310" stroke="var(--ai)" stroke-width="4"/>
+        <text x="124" y="348" font-size="9.5" fill="var(--ai)" text-anchor="middle">集卵扉（上開き）</text>
+        <text x="124" y="361" font-size="9.5" fill="var(--ai)" text-anchor="middle">外から卵を取る</text>
+
+        <rect x="180" y="310" width="48" height="90" fill="none" stroke="var(--ai)" stroke-width="1.2" stroke-dasharray="5 3"/>
+        <text x="204" y="302" font-size="9.5" fill="var(--ai)" text-anchor="middle">自動扉</text>
+        <text x="204" y="360" font-size="9.5" fill="var(--ai)" text-anchor="middle">スロープ</text>
+
+        <circle cx="250" cy="238" r="13" fill="none" stroke="var(--ai)" stroke-width="1.6"/>
+        <circle cx="250" cy="276" r="12" fill="none" stroke="var(--ai)" stroke-width="1.6"/>
+        <text x="272" y="236" font-size="9.5" fill="var(--ai)">給餌器（吊り下げ）</text>
+        <text x="272" y="280" font-size="9.5" fill="var(--ai)">給水器（ニップル式）</text>
+        <line x1="82" y1="190" x2="418" y2="190" stroke="var(--ai)" stroke-width="5" stroke-linecap="round"/>
+        <text x="250" y="180" font-size="10.5" fill="var(--ai)" text-anchor="middle">止まり木（前から60・FL+85）</text>
+
+        <path d="M259,310 A172,172 0 0 0 309.4,431.6" fill="none" stroke="var(--ink-3)" stroke-width="1" stroke-dasharray="4 4"/>
+        <line x1="431" y1="310" x2="309.4" y2="431.6" stroke="currentColor" stroke-width="2.6"/>
+        <text x="316" y="458" font-size="10.5" fill="var(--ink-2)">扉 81.5幅（右吊元・外開き）</text>
+
+        <g stroke="var(--shu)" stroke-width="1" fill="var(--shu)" font-size="11" font-family="Roboto Mono, monospace">
+          <line x1="60" y1="34" x2="440" y2="34" marker-start="url(#a1)" marker-end="url(#a1)"/>
+          <text x="250" y="29" text-anchor="middle">190</text>
+          <line x1="69" y1="56" x2="250" y2="56" marker-start="url(#a1)" marker-end="url(#a1)"/>
+          <line x1="250" y1="56" x2="431" y2="56" marker-start="url(#a1)" marker-end="url(#a1)"/>
+          <text x="159" y="51" text-anchor="middle">90.5</text>
+          <text x="341" y="51" text-anchor="middle">90.5</text>
+          <line x1="470" y1="110" x2="470" y2="310" marker-start="url(#a1)" marker-end="url(#a1)"/>
+          <text x="484" y="210" text-anchor="middle" transform="rotate(90 484 210)">100</text>
+          <line x1="496" y1="94" x2="496" y2="330" marker-start="url(#a1)" marker-end="url(#a1)"/>
+          <text x="510" y="212" text-anchor="middle" transform="rotate(90 510 212)">118（屋根）</text>
+          <g stroke="var(--shu)" stroke-width=".7" opacity=".55">
+            <line x1="60" y1="42" x2="60" y2="106"/><line x1="440" y1="42" x2="440" y2="106"/>
+            <line x1="69" y1="60" x2="69" y2="106"/><line x1="250" y1="60" x2="250" y2="106"/><line x1="431" y1="60" x2="431" y2="106"/>
+            <line x1="444" y1="110" x2="466" y2="110"/><line x1="444" y1="310" x2="466" y2="310"/>
+          </g>
+        </g>
+
+        <text x="512" y="356" font-size="10" fill="var(--ink-2)" text-anchor="end">柱 90角</text>
+        <text x="512" y="372" font-size="10" fill="var(--ink-3)" text-anchor="end">垂木ピッチ 約37</text>
+      </svg>
+    </div>
+    <figcaption>柱は<b>6本</b>。前後の中間柱（心 x=95）が、人用の扉と左側の設備面を分ける役目を兼ねます。<b>産卵箱は正面左から外へ35cm張り出す外付け</b>にして、室内の床を食わないようにしました。<b>奥行100の内寸は82cm</b>で床面積は約1.41㎡。4羽なら1羽あたり0.35㎡で、就寝と産卵には十分な余裕があります。止まり木の下に糞受けトレーを置く空間も取れました。</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sechead"><span class="num">FIG 2</span><h2>正面図</h2></div>
+  <figure>
+    <div class="frame">
+      <svg viewBox="0 0 520 545" role="img" aria-label="鶏小屋の正面図。左ベイの下段に鶏用の自動扉と外付け産卵箱、上段は金網。右ベイは全面が人用の扉。">
+        <defs>
+          <marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L10,5 L0,9 z" fill="var(--shu)"/>
+          </marker>
+          <pattern id="gnd2" width="9" height="9" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="9" x2="9" y2="0" stroke="var(--ink-3)" stroke-width=".8"/>
+          </pattern>
+          <pattern id="mesh2" width="7" height="7" patternUnits="userSpaceOnUse">
+            <path d="M0 0 H7 M0 0 V7" stroke="currentColor" stroke-width=".55" opacity=".5" fill="none"/>
+          </pattern>
+          <pattern id="brd2" width="12" height="12" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="12" y2="0" stroke="currentColor" stroke-width=".8" opacity=".4"/>
+          </pattern>
+        </defs>
+
+        <rect x="44" y="64.5" width="412" height="3.5" fill="var(--ai)"/>
+        <text x="452" y="58" font-size="10.5" fill="var(--ai)" text-anchor="end">ポリカ波板 4尺 ×4枚</text>
+        <g fill="var(--shade)" stroke="currentColor" stroke-width="1.2">
+          <rect x="60" y="69.3" width="9" height="9.2"/>
+          <rect x="134.2" y="69.3" width="9" height="9.2"/>
+          <rect x="208.4" y="69.3" width="9" height="9.2"/>
+          <rect x="282.6" y="69.3" width="9" height="9.2"/>
+          <rect x="356.8" y="69.3" width="9" height="9.2"/>
+          <rect x="431" y="69.3" width="9" height="9.2"/>
+        </g>
+
+        <rect x="60" y="87" width="380" height="9" fill="var(--shade)" stroke="currentColor" stroke-width="1.4"/>
+        <text x="446" y="95" font-size="10.5" fill="var(--ink-2)">前桁 45×90</text>
+
+        <rect x="78" y="96" width="163" height="165" fill="url(#mesh2)"/>
+        <rect x="78" y="279" width="163" height="151" fill="url(#brd2)"/>
+        <rect x="78" y="261" width="163" height="18" fill="var(--paper)" stroke="currentColor" stroke-width="1.1"/>
+        <text x="159" y="180" font-size="11" fill="var(--ink-2)" text-anchor="middle">金網</text>
+        <text x="159" y="274" font-size="9.5" fill="var(--ink-2)" text-anchor="middle">中段材 FL+80</text>
+        <text x="124" y="405" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">板張り</text>
+
+        <rect x="80" y="284" width="88" height="72" fill="var(--paper-2)" stroke="var(--ai)" stroke-width="1.8"/>
+        <line x1="76" y1="284" x2="172" y2="284" stroke="var(--ai)" stroke-width="3.5"/>
+        <text x="124" y="310" font-size="10" fill="var(--ai)" text-anchor="middle">集卵扉 44×38</text>
+        <text x="124" y="324" font-size="10" fill="var(--ai)" text-anchor="middle">上ヒンジ・かぶせ</text>
+        <text x="124" y="340" font-size="9" fill="var(--ai)" text-anchor="middle">内側に産卵箱</text>
+
+        <rect x="174" y="298" width="60" height="132" fill="none" stroke="var(--ai)" stroke-width="1.2" stroke-dasharray="5 3"/>
+        <rect x="180" y="360" width="48" height="70" fill="var(--paper-2)" stroke="var(--ai)" stroke-width="1.8"/>
+        <rect x="184" y="376" width="40" height="50" fill="var(--shade)" stroke="var(--ai)" stroke-width="1.2"/>
+        <text x="204" y="322" font-size="9" fill="var(--ai)" text-anchor="middle">T50</text>
+        <text x="204" y="336" font-size="9" fill="var(--ai)" text-anchor="middle">扉板の逃げ</text>
+        <text x="204" y="350" font-size="9" fill="var(--ai)" text-anchor="middle">30.5</text>
+        <text x="204" y="398" font-size="9" fill="var(--ai)" text-anchor="middle">開口</text>
+        <text x="204" y="411" font-size="9" fill="var(--ai)" text-anchor="middle">20×25</text>
+
+        <rect x="262" y="99" width="157" height="329" fill="none" stroke="currentColor" stroke-width="1.6"/>
+        <rect x="264" y="101" width="153" height="158" fill="url(#mesh2)"/>
+        <rect x="264" y="279" width="153" height="147" fill="url(#brd2)"/>
+        <rect x="264" y="261" width="153" height="18" fill="var(--paper)" stroke="currentColor" stroke-width="1"/>
+        <g stroke="var(--ink-3)" stroke-width="1" stroke-dasharray="5 4">
+          <line x1="264" y1="101" x2="417" y2="264"/>
+          <line x1="264" y1="426" x2="417" y2="264"/>
+        </g>
+        <text x="330" y="180" font-size="11" fill="var(--ink-2)" text-anchor="middle">扉 81.5 × 167</text>
+
+        <g fill="var(--paper-2)" stroke="currentColor" stroke-width="1.6">
+          <rect x="60" y="96" width="18" height="334"/>
+          <rect x="241" y="96" width="18" height="334"/>
+          <rect x="422" y="96" width="18" height="334"/>
+        </g>
+
+        <rect x="60" y="430" width="380" height="14" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.3"/>
+        <rect x="60" y="444" width="380" height="16" fill="var(--shade)" stroke="currentColor" stroke-width="1.3"/>
+        <line x1="20" y1="460" x2="500" y2="460" stroke="currentColor" stroke-width="1.8"/>
+        <rect x="20" y="460" width="480" height="12" fill="url(#gnd2)"/>
+        <text x="446" y="300" font-size="10.5" fill="var(--ink-2)">前柱 90×90</text>
+        <text x="446" y="314" font-size="10.5" fill="var(--ink-2)">L=167</text>
+        <text x="446" y="440" font-size="10.5" fill="var(--ink-2)">既存 土台木</text>
+        <text x="446" y="456" font-size="10.5" fill="var(--ink-2)">既存 ブロック</text>
+
+        <g stroke="var(--shu)" stroke-width="1" fill="var(--shu)" font-size="11" font-family="Roboto Mono, monospace">
+          <line x1="34" y1="430" x2="34" y2="96" marker-start="url(#a2)" marker-end="url(#a2)"/>
+          <text x="24" y="266" text-anchor="middle" transform="rotate(-90 24 266)">167</text>
+          <line x1="69" y1="490" x2="250" y2="490" marker-start="url(#a2)" marker-end="url(#a2)"/>
+          <line x1="250" y1="490" x2="431" y2="490" marker-start="url(#a2)" marker-end="url(#a2)"/>
+          <text x="159" y="485" text-anchor="middle">90.5</text>
+          <text x="341" y="485" text-anchor="middle">90.5</text>
+          <line x1="60" y1="514" x2="440" y2="514" marker-start="url(#a2)" marker-end="url(#a2)"/>
+          <text x="250" y="509" text-anchor="middle">190</text>
+          <g stroke="var(--shu)" stroke-width=".7" opacity=".55">
+            <line x1="38" y1="430" x2="58" y2="430"/><line x1="38" y1="96" x2="58" y2="96"/>
+            <line x1="69" y1="464" x2="69" y2="494"/><line x1="250" y1="464" x2="250" y2="494"/><line x1="431" y1="464" x2="431" y2="494"/>
+            <line x1="60" y1="464" x2="60" y2="518"/><line x1="440" y1="464" x2="440" y2="518"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <figcaption>正面左ベイ（内寸81.5cm）に、<b>外付け産卵箱と自動扉を左右に並べて</b>収めています。産卵箱が幅40、自動扉のユニットが幅30で、合わせて70cm。左右に少し余裕が残ります。<b>FL+80の中段材から上は全面金網</b>で通気を取り、下は板張りで風よけ。扉は柱の内側いっぱい <b>81.5 × 167</b>、床まで開くので掃除がしやすい構成です。</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sechead"><span class="num">FIG 3</span><h2>側面図 ── 屋根勾配</h2></div>
+  <figure>
+    <div class="frame">
+      <svg viewBox="0 0 410 545" role="img" aria-label="鶏小屋の側面図。奥行100、前柱167、後柱150で高低差17cm、垂木は約2.1寸勾配で奥に下がり、屋根の水平長は118cm。">
+        <defs>
+          <marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L10,5 L0,9 z" fill="var(--shu)"/>
+          </marker>
+          <pattern id="gnd3" width="9" height="9" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="9" x2="9" y2="0" stroke="var(--ink-3)" stroke-width=".8"/>
+          </pattern>
+        </defs>
+
+        <g stroke="var(--shu)" stroke-width="1.2" fill="none">
+          <line x1="170" y1="50" x2="210" y2="50"/>
+          <line x1="210" y1="50" x2="210" y2="58.3"/>
+          <line x1="170" y1="50" x2="210" y2="58.3"/>
+        </g>
+        <text x="190" y="44" font-size="10.5" fill="var(--shu)" text-anchor="middle" font-family="Roboto Mono, monospace">10</text>
+        <text x="216" y="59" font-size="10.5" fill="var(--shu)" font-family="Roboto Mono, monospace">2.1</text>
+        <text x="242" y="56" font-size="10.5" fill="var(--shu)">≒2.1寸勾配（11.7°）</text>
+
+        <line x1="80" y1="66.5" x2="316" y2="115.4" stroke="var(--ai)" stroke-width="3"/>
+        <text x="58" y="58" font-size="10.5" fill="var(--ai)">波板</text>
+
+        <polygon points="80,79.1 316,128.0 316,118.8 80,69.9" fill="var(--shade)" stroke="currentColor" stroke-width="1.4"/>
+        <text x="324" y="134" font-size="10.5" fill="var(--ink-2)">垂木 45×45</text>
+
+        <rect x="100" y="87" width="18" height="9" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.4"/>
+        <rect x="282" y="121" width="18" height="9" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.4"/>
+
+        <circle cx="118" cy="87" r="3" fill="var(--shu)"/>
+        <circle cx="282" cy="121" r="3" fill="var(--shu)"/>
+        <line x1="118" y1="87" x2="282" y2="121" stroke="var(--shu)" stroke-width=".8" stroke-dasharray="3 3"/>
+        <text x="200" y="160" font-size="10" fill="var(--shu)" text-anchor="middle">垂木の当たり 芯間82</text>
+
+        <g fill="var(--paper-2)" stroke="currentColor" stroke-width="1.6">
+          <rect x="100" y="96" width="18" height="334"/>
+          <rect x="282" y="130" width="18" height="300"/>
+        </g>
+        <text x="109" y="215" font-size="10.5" fill="var(--ink-2)" text-anchor="middle" transform="rotate(-90 109 215)">前柱 167</text>
+        <text x="291" y="230" font-size="10.5" fill="var(--ink-2)" text-anchor="middle" transform="rotate(-90 291 230)">後柱 150</text>
+
+        <rect x="118" y="261" width="164" height="18" fill="var(--paper)" stroke="currentColor" stroke-width="1.1"/>
+        <text x="200" y="274" font-size="9.5" fill="var(--ink-2)" text-anchor="middle">側面つなぎ 45×90（FL+80）</text>
+
+        <rect x="100" y="430" width="200" height="14" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.3"/>
+        <rect x="100" y="444" width="200" height="16" fill="var(--shade)" stroke="currentColor" stroke-width="1.3"/>
+        <line x1="20" y1="460" x2="390" y2="460" stroke="currentColor" stroke-width="1.8"/>
+        <rect x="20" y="460" width="370" height="12" fill="url(#gnd3)"/>
+        <text x="306" y="444" font-size="10.5" fill="var(--ink-2)">既存基礎（GL+15）</text>
+        <text x="78" y="106" font-size="10.5" fill="var(--ink-2)" text-anchor="end">前 ←</text>
+        <text x="310" y="150" font-size="10.5" fill="var(--ink-2)">→ 奥</text>
+
+        <g stroke="var(--shu)" stroke-width="1" fill="var(--shu)" font-size="11" font-family="Roboto Mono, monospace">
+          <line x1="34" y1="460" x2="34" y2="69.9" marker-start="url(#a3)" marker-end="url(#a3)"/>
+          <text x="24" y="272" text-anchor="middle" transform="rotate(-90 24 272)">195</text>
+          <line x1="62" y1="430" x2="62" y2="96" marker-start="url(#a3)" marker-end="url(#a3)"/>
+          <text x="52" y="266" text-anchor="middle" transform="rotate(-90 52 266)">167</text>
+          <line x1="334" y1="430" x2="334" y2="130" marker-start="url(#a3)" marker-end="url(#a3)"/>
+          <text x="346" y="284" text-anchor="middle" transform="rotate(90 346 284)">150</text>
+          <line x1="372" y1="87" x2="372" y2="121" marker-start="url(#a3)" marker-end="url(#a3)"/>
+          <text x="382" y="108">17</text>
+          <line x1="100" y1="492" x2="300" y2="492" marker-start="url(#a3)" marker-end="url(#a3)"/>
+          <text x="200" y="487" text-anchor="middle">100</text>
+          <line x1="80" y1="514" x2="316" y2="514" marker-start="url(#a3)" marker-end="url(#a3)"/>
+          <text x="198" y="509" text-anchor="middle">118（屋根水平長）</text>
+          <g stroke="var(--shu)" stroke-width=".7" opacity=".5">
+            <line x1="38" y1="69.9" x2="78" y2="69.9"/>
+            <line x1="66" y1="430" x2="98" y2="430"/><line x1="66" y1="96" x2="98" y2="96"/>
+            <line x1="304" y1="430" x2="330" y2="430"/><line x1="304" y1="130" x2="330" y2="130"/>
+            <line x1="122" y1="87" x2="368" y2="87"/><line x1="304" y1="121" x2="368" y2="121"/>
+            <line x1="100" y1="464" x2="100" y2="496"/><line x1="300" y1="464" x2="300" y2="496"/>
+            <line x1="80" y1="84" x2="80" y2="518"/><line x1="316" y1="132" x2="316" y2="518"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <figcaption>勾配は<b>前後の柱を17cm変えるだけ</b>で決まります。垂木が実際に桁へ触れるのは桁の内側の角どうし（芯間82cm）なので、17 ÷ 82 ＝ 約2.1寸。屋根の水平長を<b>118cm</b>に決めてあるのは、斜辺が120.5cmになって<b>ポリカ波板の4尺（1210mm）が切らずに1枚で収まる</b>ためです。奥行が70から100に増えても、この関係を保てば波板は1枚で足ります。</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sechead"><span class="num">FIG 4</span><h2>納まり詳細</h2></div>
+  <figure>
+    <div class="frame">
+      <svg viewBox="0 0 600 300" role="img" aria-label="柱脚の納まりと、桁の上に垂木を載せる納まりの詳細図。">
+        <defs>
+          <marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L10,5 L0,9 z" fill="var(--shu)"/>
+          </marker>
+          <pattern id="gnd4" width="9" height="9" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="9" x2="9" y2="0" stroke="var(--ink-3)" stroke-width=".8"/>
+          </pattern>
+          <pattern id="conc4" width="8" height="8" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r="1" fill="var(--ink-3)"/><circle cx="6" cy="6" r=".8" fill="var(--ink-3)"/>
+          </pattern>
+        </defs>
+
+        <text x="30" y="30" font-size="12" font-weight="700" fill="currentColor">A ── 柱脚</text>
+        <text x="344" y="30" font-size="12" font-weight="700" fill="currentColor">B ── 桁天端・垂木</text>
+        <line x1="318" y1="16" x2="318" y2="284" stroke="var(--rule)" stroke-width="1"/>
+
+        <polyline points="112,80 121,72 130,82 139,72 148,80" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <rect x="112" y="80" width="36" height="110" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.6"/>
+        <rect x="70" y="190" width="120" height="24" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.4"/>
+        <rect x="70" y="214" width="120" height="4" fill="var(--shu)" stroke="none"/>
+        <text x="196" y="222" font-size="9.5" fill="var(--shu)">縁切りテープ</text>
+        <line x1="192" y1="219" x2="190" y2="216" stroke="var(--shu)" stroke-width=".8"/>
+        <rect x="70" y="218" width="120" height="32" fill="url(#conc4)" stroke="currentColor" stroke-width="1.4"/>
+        <rect x="70" y="250" width="120" height="34" fill="none" stroke="var(--ink-3)" stroke-width="1" stroke-dasharray="5 4"/>
+        <line x1="30" y1="250" x2="240" y2="250" stroke="currentColor" stroke-width="1.8"/>
+        <rect x="30" y="250" width="210" height="10" fill="url(#gnd4)"/>
+        <g fill="none" stroke="var(--ai)" stroke-width="3">
+          <path d="M112,152 L112,190 L78,190"/>
+          <path d="M148,152 L148,190 L182,190"/>
+        </g>
+        <text x="196" y="128" font-size="10" fill="var(--ai)">L金物（2面）</text>
+        <text x="196" y="140" font-size="10" fill="var(--ai)">＋65mmビス</text>
+        <text x="106" y="112" font-size="10" fill="var(--ink-2)" text-anchor="end">柱 90×90</text>
+        <text x="64" y="208" font-size="10" fill="var(--ink-2)" text-anchor="end">既存土台</text>
+        <text x="64" y="240" font-size="10" fill="var(--ink-2)" text-anchor="end">ブロック</text>
+        <text x="64" y="272" font-size="10" fill="var(--ink-3)" text-anchor="end">（地中）</text>
+        <g stroke="var(--shu)" stroke-width="1" fill="var(--shu)" font-size="11" font-family="Roboto Mono, monospace">
+          <line x1="262" y1="250" x2="262" y2="190" marker-start="url(#a4)" marker-end="url(#a4)"/>
+          <text x="272" y="224">15</text>
+          <line x1="194" y1="190" x2="258" y2="190" stroke-width=".7" opacity=".5"/>
+        </g>
+
+        <g transform="translate(64,0)">
+        <line x1="290" y1="88.9" x2="440" y2="120.6" stroke="var(--ai)" stroke-width="3"/>
+        <text x="446" y="116" font-size="10" fill="var(--ai)">波板</text>
+        <polygon points="290,112.3 440,144 440,125.6 290,93.9" fill="var(--shade)" stroke="currentColor" stroke-width="1.5"/>
+        <polygon points="300,114.4 336,122 300,122" fill="var(--shu)" opacity=".22"/>
+        <rect x="300" y="122" width="36" height="18" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.5"/>
+        <rect x="300" y="140" width="36" height="104" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.6"/>
+        <polyline points="300,244 309,252 318,242 327,252 336,244" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <circle cx="336" cy="122" r="3.2" fill="var(--shu)"/>
+        <text x="446" y="146" font-size="10" fill="var(--ink-2)">垂木 45×45</text>
+        <text x="286" y="120" font-size="10" fill="var(--ink-2)" text-anchor="end">桁 45×90</text>
+        <text x="286" y="132" font-size="10" fill="var(--ink-2)" text-anchor="end">平使い</text>
+        <text x="292" y="196" font-size="10" fill="var(--ink-2)" text-anchor="end">柱 90×90</text>
+        <text x="344" y="170" font-size="10" fill="var(--shu)">接点は桁の内側の角</text>
+        <text x="344" y="184" font-size="10" fill="var(--shu)">前側の隙間は残してOK</text>
+        <text x="344" y="204" font-size="10" fill="var(--ink-2)">斜めビス＋ひねり金物</text>
+        </g>
+      </svg>
+    </div>
+    <figcaption><b>A：</b><b>ブロックと土台の間に赤い層</b>があります。これがブチルテープで、ブロックが地中から吸い上げる水を木に渡さないための縁切りです。厚みは1mm足らずですが、これがあるかないかで土台の寿命が変わります。柱は土台の上に直接立て、L金物を隣り合う2面に当ててビス留め。柱の下側の木口は水が溜まって最初に腐る場所なので、立てる前に必ず防腐材を塗ります。<br><b>B：</b>勾配が緩いので垂木の欠き込み（バードマウス）は不要です。桁の内側の角に垂木が当たり、前側に小さな三角の隙間が残りますが、そこは無視して斜めビス＋ひねり金物で留めれば十分もちます。見た目が気になるときだけ垂木を欠き込んでください。</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sechead"><span class="num">FIG 5</span><h2>産卵箱と自動扉</h2></div>
+  <figure>
+    <div class="frame">
+      <svg viewBox="0 0 720 360" role="img" aria-label="室内に置く産卵箱の断面図と、RUN-CHICKEN T50自動扉の取り付け寸法図。">
+        <defs>
+          <marker id="a5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L10,5 L0,9 z" fill="var(--shu)"/>
+          </marker>
+          <pattern id="gnd5" width="9" height="9" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="9" x2="9" y2="0" stroke="var(--ink-3)" stroke-width=".8"/>
+          </pattern>
+          <pattern id="lit5" width="6" height="6" patternUnits="userSpaceOnUse">
+            <circle cx="2" cy="2" r=".9" fill="var(--ink-3)"/><circle cx="5" cy="4.5" r=".7" fill="var(--ink-3)"/>
+          </pattern>
+        </defs>
+
+        <text x="200" y="26" font-size="12" font-weight="700" fill="currentColor">A ── 産卵箱の断面（外は左・室内は右）</text>
+        <text x="500" y="26" font-size="12" font-weight="700" fill="currentColor">B ── 自動扉 T50 の取り付け</text>
+        <line x1="452" y1="42" x2="452" y2="344" stroke="var(--rule)" stroke-width="1"/>
+
+        <rect x="250" y="60" width="8" height="220" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.4"/>
+        <rect x="250" y="146" width="8" height="56" fill="var(--paper)" stroke="none"/>
+        <line x1="250" y1="146" x2="258" y2="146" stroke="currentColor" stroke-width="1"/>
+        <line x1="250" y1="202" x2="258" y2="202" stroke="currentColor" stroke-width="1"/>
+
+        <rect x="243" y="136" width="7" height="76" fill="var(--shade)" stroke="var(--ai)" stroke-width="1.5"/>
+        <circle cx="246" cy="139" r="3.4" fill="var(--ai)"/>
+        <path d="M243,136 L216,116 L223,112 L250,132" fill="none" stroke="var(--ai)" stroke-width="1" stroke-dasharray="4 3"/>
+        <text x="150" y="106" font-size="10" fill="var(--ai)">集卵扉（上開き・かぶせ）</text>
+        <text x="150" y="119" font-size="10" fill="var(--ai)">開けると庇になる</text>
+
+        <rect x="258" y="140" width="70" height="6" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.3"/>
+        <rect x="258" y="210" width="70" height="6" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.3"/>
+        <rect x="322" y="190" width="6" height="20" fill="var(--shade)" stroke="currentColor" stroke-width="1.2"/>
+        <rect x="310" y="216" width="9" height="9" fill="var(--shade)" stroke="currentColor" stroke-width="1"/>
+
+        <text x="336" y="132" font-size="10" fill="var(--ink-2)">産卵箱 内寸 38×35×高30</text>
+        <text x="336" y="168" font-size="10" fill="var(--ink-2)">壁の開口 高28（FL+39〜67）</text>
+        <text x="336" y="196" font-size="10" fill="var(--shu)">縁板10（敷料と卵の止め）</text>
+        <text x="336" y="232" font-size="10" fill="var(--ink-2)">受け桟 45×45（FL+35）</text>
+        <text x="266" y="252" font-size="10" fill="var(--ai)">箱の下は鶏の隠れ場所になる</text>
+
+        <rect x="258" y="262" width="162" height="18" fill="url(#lit5)"/>
+        <line x1="258" y1="280" x2="424" y2="280" stroke="currentColor" stroke-width="1.6"/>
+        <rect x="250" y="280" width="174" height="30" fill="var(--shade)" stroke="currentColor" stroke-width="1.2"/>
+        <text x="266" y="300" font-size="10" fill="var(--ink-2)">既存 基礎＋土台 15</text>
+        <line x1="200" y1="310" x2="432" y2="310" stroke="currentColor" stroke-width="1.8"/>
+        <rect x="200" y="310" width="232" height="11" fill="url(#gnd5)"/>
+
+        <g stroke="var(--shu)" stroke-width="1" fill="var(--shu)" font-size="11" font-family="Roboto Mono, monospace">
+          <line x1="258" y1="336" x2="328" y2="336" marker-start="url(#a5)" marker-end="url(#a5)"/>
+          <text x="293" y="331" text-anchor="middle">35</text>
+          <line x1="236" y1="140" x2="236" y2="210" marker-start="url(#a5)" marker-end="url(#a5)"/>
+          <text x="226" y="175" text-anchor="middle" transform="rotate(-90 226 175)">35</text>
+          <line x1="214" y1="216" x2="214" y2="280" marker-start="url(#a5)" marker-end="url(#a5)"/>
+          <text x="204" y="248" text-anchor="middle" transform="rotate(-90 204 248)">35</text>
+          <g stroke="var(--shu)" stroke-width=".7" opacity=".5">
+            <line x1="258" y1="220" x2="258" y2="340"/><line x1="328" y1="220" x2="328" y2="340"/>
+            <line x1="240" y1="140" x2="256" y2="140"/><line x1="240" y1="210" x2="256" y2="210"/>
+            <line x1="218" y1="216" x2="254" y2="216"/><line x1="218" y1="280" x2="246" y2="280"/>
+          </g>
+        </g>
+
+        <rect x="536" y="149" width="48" height="61" fill="none" stroke="var(--ai)" stroke-width="1.2" stroke-dasharray="5 3"/>
+        <rect x="536" y="210" width="48" height="70" fill="var(--paper-2)" stroke="var(--ai)" stroke-width="1.8"/>
+        <rect x="540" y="226" width="40" height="50" fill="var(--shade)" stroke="var(--ai)" stroke-width="1.2"/>
+        <text x="592" y="176" font-size="10" fill="var(--ai)">扉板の逃げ</text>
+        <text x="592" y="188" font-size="10" fill="var(--ai)">30.5 必要</text>
+        <text x="592" y="238" font-size="10" fill="var(--ai)">本体 23.9W×35H</text>
+        <text x="592" y="262" font-size="10" fill="var(--ai)">開口 20×25</text>
+
+        <polygon points="540,276 580,276 604,310 516,310" fill="var(--shade)" stroke="currentColor" stroke-width="1.3"/>
+        <text x="610" y="304" font-size="10" fill="var(--ink-2)">スロープ</text>
+        <line x1="470" y1="310" x2="700" y2="310" stroke="currentColor" stroke-width="1.8"/>
+        <rect x="470" y="310" width="230" height="11" fill="url(#gnd5)"/>
+
+        <g stroke="var(--shu)" stroke-width="1" fill="var(--shu)" font-size="11" font-family="Roboto Mono, monospace">
+          <line x1="540" y1="336" x2="580" y2="336" marker-start="url(#a5)" marker-end="url(#a5)"/>
+          <text x="560" y="331" text-anchor="middle">20</text>
+          <line x1="524" y1="226" x2="524" y2="276" marker-start="url(#a5)" marker-end="url(#a5)"/>
+          <text x="514" y="251" text-anchor="middle" transform="rotate(-90 514 251)">25</text>
+          <line x1="500" y1="149" x2="500" y2="280" marker-start="url(#a5)" marker-end="url(#a5)"/>
+          <text x="490" y="214" text-anchor="middle" transform="rotate(-90 490 214)">66</text>
+          <g stroke="var(--shu)" stroke-width=".7" opacity=".5">
+            <line x1="540" y1="314" x2="540" y2="340"/><line x1="580" y1="314" x2="580" y2="340"/>
+            <line x1="528" y1="226" x2="538" y2="226"/><line x1="528" y1="276" x2="538" y2="276"/>
+            <line x1="504" y1="149" x2="534" y2="149"/>
+          </g>
+        </g>
+        <text x="470" y="356" font-size="9.5" fill="var(--shu)">※T50は単3電池2本・挟まれ防止つき。</text>
+      </svg>
+    </div>
+    <figcaption><b>A：</b>産卵箱は室内、正面壁の内側に付けます。<b>FL+35に浮かせる</b>のがポイントで、床面積を食わないうえに箱の下が鶏の隠れ場所になります。壁の開口の下端を箱の底より4cm高くすると、それが敷居になって卵と敷料がこぼれません。室内側にも縁板を10cm立てて同じ役目をさせます。集卵扉は<b>上ヒンジのかぶせ扉</b>で、開ければそのまま庇になり、雨の日でも卵が濡れません。<br><b>B：</b>RUN-CHICKEN T50の実寸です。必要な開口は<b>20×25</b>と小さいのですが、<b>扉板が上がる逃げが30.5cm要る</b>ので、壁面は合計66cmを空けておく必要があります。だから産卵箱と自動扉は上下ではなく<b>左右に並べて</b>います。</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sechead"><span class="num">FIG 6</span><h2>接合部の納まり</h2></div>
+  <figure>
+    <div class="frame">
+      <svg viewBox="0 0 720 360" role="img" aria-label="柱と桁と垂木の接合方法、および合板の目地とビスの打ち方を示した詳細図。">
+        <defs>
+          <marker id="a6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L10,5 L0,9 z" fill="var(--shu)"/>
+          </marker>
+        </defs>
+
+        <text x="40" y="30" font-size="12" font-weight="700" fill="currentColor">A ── 柱・桁・垂木</text>
+        <text x="380" y="30" font-size="12" font-weight="700" fill="currentColor">B ── 合板の目地とビス</text>
+        <line x1="360" y1="44" x2="360" y2="250" stroke="var(--rule)" stroke-width="1"/>
+
+        <line x1="108" y1="116" x2="292" y2="154" stroke="var(--ai)" stroke-width="3"/>
+        <polygon points="110,142.5 290,179.7 290,157.2 110,120" fill="var(--shade)" stroke="currentColor" stroke-width="1.4"/>
+        <text x="296" y="174" font-size="10" fill="var(--ink-2)">垂木 45×45</text>
+
+        <rect x="140" y="158" width="45" height="22" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.5"/>
+        <rect x="140" y="180" width="45" height="60" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.6"/>
+        <polyline points="140,236 151,244 162,234 173,244 185,236" fill="none" stroke="currentColor" stroke-width="1.4"/>
+        <text x="136" y="152" font-size="10" fill="var(--ink-2)" text-anchor="end">桁 45×90 平使い</text>
+        <text x="136" y="212" font-size="10" fill="var(--ink-2)" text-anchor="end">柱 90×90</text>
+
+        <rect x="134" y="162" width="5" height="50" fill="var(--ai)"/>
+        <text x="128" y="228" font-size="10" fill="var(--ai)" text-anchor="end">山形プレート</text>
+
+        <g stroke="var(--shu)" stroke-width="2" fill="none">
+          <line x1="154" y1="161" x2="158" y2="212"/>
+          <line x1="172" y1="161" x2="168" y2="212"/>
+          <line x1="208" y1="146" x2="192" y2="172"/>
+        </g>
+        <circle cx="154" cy="161" r="2.4" fill="var(--shu)"/>
+        <circle cx="172" cy="161" r="2.4" fill="var(--shu)"/>
+        <circle cx="208" cy="146" r="2.4" fill="var(--shu)"/>
+        <polyline points="176,155 185,158 185,178" fill="none" stroke="var(--ai)" stroke-width="3"/>
+        <text x="214" y="200" font-size="10" fill="var(--shu)">90mmビス×2</text>
+        <text x="214" y="214" font-size="10" fill="var(--shu)">斜めビス65mm</text>
+        <text x="214" y="228" font-size="10" fill="var(--ai)">ひねり金物</text>
+
+        <rect x="400" y="60" width="198" height="94" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.4"/>
+        <rect x="400" y="157" width="198" height="83" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.4"/>
+        <g fill="var(--shade)" stroke="currentColor" stroke-width="1.4">
+          <rect x="400" y="60" width="18" height="180"/>
+          <rect x="580" y="60" width="18" height="180"/>
+        </g>
+        <rect x="400" y="146" width="198" height="18" fill="none" stroke="var(--ink-3)" stroke-width="1" stroke-dasharray="5 3"/>
+        <text x="409" y="52" font-size="10" fill="var(--ink-2)" text-anchor="middle">柱</text>
+        <text x="505" y="132" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">合板 12mm</text>
+        <text x="604" y="142" font-size="10" fill="var(--ink-3)">中段材（下地）</text>
+        <text x="604" y="160" font-size="10" fill="var(--shu)">目地は下地の上で</text>
+        <text x="604" y="173" font-size="10" fill="var(--shu)">2〜3mm空ける</text>
+
+        <g fill="var(--shu)">
+          <circle cx="406" cy="70" r="1.9"/><circle cx="406" cy="94" r="1.9"/><circle cx="406" cy="118" r="1.9"/><circle cx="406" cy="142" r="1.9"/>
+          <circle cx="592" cy="70" r="1.9"/><circle cx="592" cy="94" r="1.9"/><circle cx="592" cy="118" r="1.9"/><circle cx="592" cy="142" r="1.9"/>
+          <circle cx="430" cy="66" r="1.9"/><circle cx="454" cy="66" r="1.9"/><circle cx="478" cy="66" r="1.9"/><circle cx="502" cy="66" r="1.9"/><circle cx="526" cy="66" r="1.9"/><circle cx="550" cy="66" r="1.9"/><circle cx="574" cy="66" r="1.9"/>
+          <circle cx="430" cy="148" r="1.9"/><circle cx="454" cy="148" r="1.9"/><circle cx="478" cy="148" r="1.9"/><circle cx="502" cy="148" r="1.9"/><circle cx="526" cy="148" r="1.9"/><circle cx="550" cy="148" r="1.9"/><circle cx="574" cy="148" r="1.9"/>
+          <circle cx="406" cy="167" r="1.9"/><circle cx="406" cy="191" r="1.9"/><circle cx="406" cy="215" r="1.9"/><circle cx="406" cy="234" r="1.9"/>
+          <circle cx="592" cy="167" r="1.9"/><circle cx="592" cy="191" r="1.9"/><circle cx="592" cy="215" r="1.9"/><circle cx="592" cy="234" r="1.9"/>
+          <circle cx="430" cy="163" r="1.9"/><circle cx="478" cy="163" r="1.9"/><circle cx="526" cy="163" r="1.9"/><circle cx="574" cy="163" r="1.9"/>
+        </g>
+        <g stroke="var(--shu)" stroke-width="1" fill="var(--shu)" font-size="10.5" font-family="Roboto Mono, monospace">
+          <line x1="430" y1="120" x2="430" y2="96" marker-start="url(#a6)" marker-end="url(#a6)"/>
+          <text x="436" y="112">外周@150</text>
+        </g>
+
+        <text x="40" y="278" font-size="11" fill="var(--ink-2)"><tspan font-weight="700" fill="var(--shu)">柱→桁　</tspan>桁の上から90mmビスを2本、ハの字に開いて柱の木口へ。木口へのビスは保持力が半分しかないので、柱の外面に山形プレート1枚を必ず併用します。</text>
+        <text x="40" y="298" font-size="11" fill="var(--ink-2)"><tspan font-weight="700" fill="var(--shu)">垂木→桁</tspan>　斜めビス65mm×2とひねり金物1個を各交点に。接点が「線」なので、垂直に打つと隙間を貫通するだけで効きません。</text>
+        <text x="40" y="318" font-size="11" fill="var(--ink-2)"><tspan font-weight="700" fill="var(--shu)">合板　　</tspan>41mmビス、外周@150・中通り@250、端から15mm内側。目地は必ず下地の上で、2〜3mm空けて突きつけます。</text>
+        <text x="40" y="338" font-size="11" fill="var(--ink-2)"><tspan font-weight="700" fill="var(--shu)">出隅　　</tspan>片方の板の木口が必ず外に出るので、4隅に15×30の隅木を打って覆います。横目地の上にも同じ材で押し縁を1本。</text>
+      </svg>
+    </div>
+    <figcaption><b>木口へのビスは効きません。</b>柱の天端に打つビスは繊維の断面に刺さるので、横から打つ場合の半分以下の保持力しかありません。だから<b>山形プレート</b>が要ります。屋根は風で持ち上げられる力を受けるので、ここを省くと台風で桁ごと浮きます。<br><b>合板の目地を2〜3mm空けるのは膨張のため。</b>ぴったり突きつけると、雨で膨らんだときに押し合って板が浮きます。隙間は押し縁で覆うので雨は入りません。</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sechead"><span class="num">FIG 7</span><h2>合板の張り方</h2></div>
+  <figure>
+    <div class="frame">
+      <svg viewBox="0 0 720 440" role="img" aria-label="合板のビスの打ち方、目地の断面、出隅の納まりを示した詳細図。">
+        <defs>
+          <marker id="a7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path d="M0,1 L10,5 L0,9 z" fill="var(--shu)"/>
+          </marker>
+          <marker id="w7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,1 L10,5 L0,9 z" fill="var(--ai)"/>
+          </marker>
+        </defs>
+
+        <text x="40" y="30" font-size="12" font-weight="700" fill="currentColor">A ── ビスの打ち方（外から見た図）</text>
+        <text x="410" y="30" font-size="12" font-weight="700" fill="currentColor">B ── 横目地の断面</text>
+        <text x="410" y="228" font-size="12" font-weight="700" fill="currentColor">C ── 出隅（上から見た図）</text>
+        <line x1="390" y1="44" x2="390" y2="380" stroke="var(--rule)" stroke-width="1"/>
+        <line x1="410" y1="208" x2="700" y2="208" stroke="var(--rule)" stroke-width="1"/>
+
+        <rect x="60" y="60" width="250" height="240" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.5"/>
+        <g fill="none" stroke="var(--ink-3)" stroke-width="1" stroke-dasharray="5 3">
+          <rect x="60" y="60" width="20" height="240"/>
+          <rect x="290" y="60" width="20" height="240"/>
+          <rect x="60" y="180" width="250" height="20"/>
+        </g>
+        <text x="185" y="140" font-size="10.5" fill="var(--ink-2)" text-anchor="middle">合板 12mm</text>
+        <text x="70" y="318" font-size="10" fill="var(--ink-3)">柱（下地）</text>
+        <text x="316" y="196" font-size="10" fill="var(--ink-3)">中段材（下地）</text>
+
+        <g fill="var(--shu)"><circle cx="70" cy="72" r="2"/><circle cx="70" cy="96" r="2"/><circle cx="70" cy="120" r="2"/><circle cx="70" cy="144" r="2"/><circle cx="70" cy="168" r="2"/><circle cx="70" cy="192" r="2"/><circle cx="70" cy="216" r="2"/><circle cx="70" cy="240" r="2"/><circle cx="70" cy="264" r="2"/><circle cx="70" cy="288" r="2"/><circle cx="300" cy="72" r="2"/><circle cx="300" cy="96" r="2"/><circle cx="300" cy="120" r="2"/><circle cx="300" cy="144" r="2"/><circle cx="300" cy="168" r="2"/><circle cx="300" cy="192" r="2"/><circle cx="300" cy="216" r="2"/><circle cx="300" cy="240" r="2"/><circle cx="300" cy="264" r="2"/><circle cx="300" cy="288" r="2"/><circle cx="94" cy="70" r="2"/><circle cx="118" cy="70" r="2"/><circle cx="142" cy="70" r="2"/><circle cx="166" cy="70" r="2"/><circle cx="190" cy="70" r="2"/><circle cx="214" cy="70" r="2"/><circle cx="238" cy="70" r="2"/><circle cx="262" cy="70" r="2"/><circle cx="286" cy="70" r="2"/><circle cx="94" cy="290" r="2"/><circle cx="118" cy="290" r="2"/><circle cx="142" cy="290" r="2"/><circle cx="166" cy="290" r="2"/><circle cx="190" cy="290" r="2"/><circle cx="214" cy="290" r="2"/><circle cx="238" cy="290" r="2"/><circle cx="262" cy="290" r="2"/><circle cx="286" cy="290" r="2"/><circle cx="94" cy="190" r="2"/><circle cx="142" cy="190" r="2"/><circle cx="190" cy="190" r="2"/><circle cx="238" cy="190" r="2"/><circle cx="286" cy="190" r="2"/></g>
+        <g stroke="var(--shu)" stroke-width="1" fill="var(--shu)" font-size="10.5" font-family="Roboto Mono, monospace">
+          <line x1="94" y1="48" x2="118" y2="48" marker-start="url(#a7)" marker-end="url(#a7)"/>
+          <text x="106" y="43" text-anchor="middle">150</text>
+          <line x1="94" y1="212" x2="142" y2="212" marker-start="url(#a7)" marker-end="url(#a7)"/>
+          <text x="118" y="226" text-anchor="middle">250</text>
+        </g>
+
+        <rect x="470" y="80" width="45" height="90" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.4"/>
+        <rect x="515" y="60" width="12" height="65" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.2"/>
+        <rect x="515" y="128" width="12" height="62" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.2"/>
+        <rect x="515" y="125" width="12" height="3" fill="var(--shu)"/>
+        <rect x="527" y="111" width="15" height="31" fill="var(--shade)" stroke="currentColor" stroke-width="1.6"/>
+        <g stroke="var(--shu)" stroke-width="1.8">
+          <line x1="527" y1="100" x2="502" y2="100"/>
+          <line x1="527" y1="158" x2="502" y2="158"/>
+          <line x1="542" y1="126" x2="502" y2="126"/>
+        </g>
+        <polyline points="556,68 556,106 570,152" fill="none" stroke="var(--ai)" stroke-width="2" marker-end="url(#w7)"/>
+        <text x="466" y="76" font-size="10" fill="var(--ink-2)" text-anchor="end">中段材</text>
+        <line x1="580" y1="78" x2="529" y2="90" stroke="var(--ink-3)" stroke-width=".8"/>
+        <text x="584" y="82" font-size="10" fill="var(--ink-2)">合板 12mm</text>
+        <line x1="580" y1="127" x2="530" y2="127" stroke="var(--shu)" stroke-width=".8"/>
+        <text x="584" y="130" font-size="10" fill="var(--shu)">2〜3mm空ける</text>
+        <line x1="580" y1="160" x2="545" y2="140" stroke="var(--ink-3)" stroke-width=".8"/>
+        <text x="584" y="164" font-size="10" fill="var(--ink-2)">押し縁 15×30</text>
+
+        <rect x="500" y="270" width="90" height="90" fill="var(--paper-2)" stroke="currentColor" stroke-width="1.4"/>
+        <rect x="488" y="258" width="112" height="12" fill="var(--shade)" stroke="currentColor" stroke-width="1.2"/>
+        <rect x="488" y="270" width="12" height="90" fill="var(--shade)" stroke="currentColor" stroke-width="1.2"/>
+        <rect x="473" y="258" width="15" height="102" fill="var(--shade)" stroke="currentColor" stroke-width="1.6"/>
+        <g fill="var(--shu)"><circle cx="480" cy="284" r="2"/><circle cx="480" cy="312" r="2"/><circle cx="480" cy="340" r="2"/></g>
+        <circle cx="488" cy="264" r="3" fill="var(--shu)"/>
+        <text x="545" y="320" font-size="10" fill="var(--ink-2)" text-anchor="middle">柱 90×90</text>
+        <text x="606" y="266" font-size="10" fill="var(--ink-2)">背面の合板</text>
+        <line x1="494" y1="364" x2="494" y2="370" stroke="var(--ink-3)" stroke-width=".8"/>
+        <text x="470" y="380" font-size="10" fill="var(--ink-2)">側面の合板</text>
+        <line x1="481" y1="252" x2="481" y2="258" stroke="var(--shu)" stroke-width=".8"/>
+        <text x="430" y="248" font-size="10" fill="var(--shu)">隅木15×30で木口を覆う</text>
+
+        <text x="40" y="404" font-size="11" fill="var(--ink-2)"><tspan font-weight="700" fill="var(--shu)">締めすぎない　</tspan>皿頭が表面と面一〜0.5mm沈む程度で止めます。めり込ませると保持力が落ちるうえ、そこが水たまりになります。</text>
+        <text x="40" y="424" font-size="11" fill="var(--ink-2)"><tspan font-weight="700" fill="var(--shu)">下地が無い所　</tspan>目地が柱にも中段材にも乗らない位置に来るときは、45×45の目地受けを1本入れてから張ります。宙に浮いた目地は不可。</text>
+      </svg>
+    </div>
+    <figcaption><b>Aのビスの数がポイントです。</b>板の外周は150mm間隔、中通り（中段材の上）は250mm間隔。端から15mm内側に打ちます。外周が密なのは、合板は<b>端から浮く</b>からです。<br><b>Bの赤い隙間が2〜3mm。</b>ぴったり突きつけると雨で膨らんだときに押し合って板が浮きます。隙間は押し縁で覆うので雨は入りません。<br><b>Cは角の納まり。</b>どう張っても片方の板の木口が外に出るので、隅木で覆います。木口はむき出しだと最初に水を吸う場所です。<br><b>合板は重ねません（鎧張りにしません）。</b>鎧張りは杉の無垢板を使う場合の張り方で、板が乾いて縮むぶんを重ねで吸収するための工法です。合板は単板を直交に貼り合わせてあるので幅方向にほとんど動かず、しかも1枚が91cm幅なので目地の数もごく少ない。<b>平らに突きつけて、目地だけ押し縁で押さえる</b>のが合板の正解です。</figcaption>
+  </figure>
+</section>
+
+<section>
+  <div class="sechead"><span class="num">CUT</span><h2>木取り表</h2></div>
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr><th>記号</th><th>部材</th><th>断面</th><th class="n">長さ</th><th class="n">本数</th><th>取り方</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="key">A</td><td>前柱</td><td>90×90</td><td class="n">167</td><td class="n">3</td><td>2m材から1本（余33）</td></tr>
+        <tr><td class="key">B</td><td>後柱</td><td>90×90</td><td class="n">150</td><td class="n">3</td><td>2m材から1本（余50）</td></tr>
+        <tr><td class="key">C</td><td>前桁</td><td>45×90</td><td class="n">190</td><td class="n">1</td><td>2m材から1本・平使い</td></tr>
+        <tr><td class="key">D</td><td>後桁</td><td>45×90</td><td class="n">190</td><td class="n">1</td><td>2m材から1本・平使い</td></tr>
+        <tr><td class="key">E</td><td>側面つなぎ（FL+80）</td><td>45×90</td><td class="n">82</td><td class="n">3</td><td>左・中・右。F/Gと組み合わせて2m材3本から取る</td></tr>
+        <tr><td class="key">F</td><td>背面中段（FL+80）</td><td>45×90</td><td class="n">81.5</td><td class="n">2</td><td>2m材から2本</td></tr>
+        <tr><td class="key">G</td><td>前面中段（固定側）</td><td>45×90</td><td class="n">81.5</td><td class="n">1</td><td>Fの残り材から</td></tr>
+        <tr><td class="key">H</td><td>垂木</td><td>45×45</td><td class="n">121</td><td class="n">6</td><td>4m材から3本ずつ。2m材だと1本しか取れず倍かかる</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin:30px 0 12px">造作（産卵箱・スロープ）</h3>
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr><th>記号</th><th>部材</th><th>材</th><th class="n">寸法</th><th class="n">枚数</th><th>備考</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="key">J</td><td>産卵箱 側板</td><td>12mm合板</td><td class="n">35×35</td><td class="n">2</td><td>室内側の角は面取り</td></tr>
+        <tr><td class="key">K</td><td>産卵箱 底板</td><td>12mm合板</td><td class="n">40×35</td><td class="n">1</td><td>掃除用に外せると楽</td></tr>
+        <tr><td class="key">L</td><td>産卵箱 天板</td><td>12mm合板</td><td class="n">40×35</td><td class="n">1</td><td>鶏が上に乗って糞をしないよう傾斜をつけても良い</td></tr>
+        <tr><td class="key">M</td><td>産卵箱 縁板</td><td>12mm合板</td><td class="n">40×10</td><td class="n">1</td><td>室内側。敷料と卵の止め。鶏はここを越えて入る</td></tr>
+        <tr><td class="key">N</td><td>集卵扉</td><td>12mm合板</td><td class="n">44×38</td><td class="n">1</td><td>開口40×28に四周2cmかぶせる。上ヒンジ</td></tr>
+        <tr><td class="key">O</td><td>産卵箱 受け桟</td><td>45×45</td><td class="n">81.5</td><td class="n">1</td><td>FL+35。左柱から中間柱へ渡して箱を載せる</td></tr>
+        <tr><td class="key">P</td><td>スロープ板</td><td>12mm合板</td><td class="n">24×45</td><td class="n">1</td><td>自動扉の下</td></tr>
+        <tr><td class="key">Q</td><td>スロープ桟</td><td>15×30</td><td class="n">24</td><td class="n">5</td><td>9cm間隔で滑り止め</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="margin:30px 0 12px">買う材料</h3>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>材料</th><th>規格</th><th class="n">数量</th><th>用途</th></tr></thead>
+      <tbody>
+        <tr><td>杉KD 角材</td><td>90×90×2000</td><td class="n">6本</td><td>柱 A・B</td></tr>
+        <tr><td>杉KD 平角</td><td>45×90×2000</td><td class="n">5本</td><td>桁 C・D、つなぎ E〜G</td></tr>
+        <tr><td>垂木材</td><td>45×45×4000</td><td class="n">2本</td><td>垂木 H。3m材なら3本（余58×3）</td></tr>
+        <tr><td>ポリカ波板</td><td>655×1210（4尺）</td><td class="n">4枚</td><td>屋根（重ね代込みで幅206をカバー）</td></tr>
+        <tr><td>波板ビス（傘釘）</td><td>—</td><td class="n">約100本</td><td>5山おきに留める</td></tr>
+        <tr><td>亜鉛引亀甲金網</td><td>#20 × 目合10mm・線径0.85mm・910幅</td><td class="n">5m巻 ×1</td><td>吉田隆／ナフコ通販 ¥5,980。開口部もスカートも1重でよい</td></tr>
+        <tr><td>押さえ縁</td><td>15×30 程度の桟</td><td class="n">約15m</td><td>金網を挟んでビス留め。ビスは合板ではなく柱・中段材に効かせる</td></tr>
+        <tr><td>針葉樹構造用合板</td><td><strong>12mm</strong>・910×1820</td><td class="n">5枚 <span class="u">購入済</span></td><td>背面2・左側面1・右側面1・正面1。造作（J〜Q）は端材から取れる</td></tr>
+        <tr><td>ステンレスコーススレッド</td><td>41 / 65 / 90mm</td><td class="n">各1箱</td><td>41mmは12mm合板を下地に留める用。屋外なのでステンレス推奨</td></tr>
+        <tr><td>L金物・山形プレート・ひねり金物</td><td>—</td><td class="n">12 / 6 / 12個</td><td>柱脚・柱頭・垂木の固定</td></tr>
+        <tr><td>防腐塗料</td><td>—</td><td class="n">1缶</td><td>外部のみ。内部は無塗装か柿渋</td></tr>
+        <tr><td>鶏用 自動扉</td><td><strong>RUN-CHICKEN T50</strong>／必要開口 20×25</td><td class="n">1台</td><td>購入済み。壁面はFL+0〜66を空ける。単3電池2本</td></tr>
+        <tr><td>ステンレス蝶番</td><td>50mm</td><td class="n">2枚</td><td>産卵箱のフタ用</td></tr>
+        <tr><td>掛金（南京錠が通るもの）</td><td>—</td><td class="n">2個</td><td>人用の扉と産卵箱のフタ</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:16px;color:var(--ink-2);font-size:13.5px"><strong>合板は12mm×5枚を購入済み（ロイヤルホームセンター三田）。</strong>1枚あたり約10.3kg、5枚で約51kg。<strong>使うまでの置き方が重要です</strong>──立てかけると反ります。屋内か軒下に<strong>平置き</strong>で、下に桟を2〜3本かませて地面から浮かせ、上にも板か重しを載せて押さえておいてください。雨が当たる場所には絶対に置かないこと。骨組みができるまでの数週間で、置き方だけで使い物にならなくなります。</p>
+<p style="margin-top:16px;color:var(--ink-2);font-size:13.5px"><strong>合板を運搬のため半分に切る場合（910×910 ×10枚）も、この骨組みなら成立します。</strong>横の継ぎ目は<span class="mono">FL+80の中段材</span>、背面の縦の継ぎ目は<span class="mono">中間柱</span>に乗るので、下地は全部そろっています。板張り部分の高さは正面85・背面125・側面133なので、FL+80で割れば残りは45〜53cmに収まります。側面だけ幅100cmに対し板が91cmなので、9cmの埋め材が1枚ずつ要ります。<strong>横の継ぎ目には水切りの押し縁を1本打ってください</strong>──突きつけたままだと目地から水が入ります。</p>
+<p style="margin-top:16px;color:var(--ink-2);font-size:13.5px"><strong>金網は5m巻1本（¥5,980）で足ります。</strong>木取りは 扉0.82m＋正面左ベイ0.82m＋通気帯1.30m＋スカート1.95m＝<span class="mono">4.89m</span>。5m巻に対して余裕は11cmしかないので、<strong>大きい面から先に切って、スカートを最後に回して</strong>ください。足りなければスカートの帯を30cmから22cmに詰めると4本取りになって48cm浮きます。</p>
+<p style="margin-top:16px;color:var(--ink-2);font-size:13.5px">90角の4m材が手に入るなら、<span class="mono">167＋150＝317</span> で1本から2本取れるので<strong>3本で足ります</strong>。運搬できるなら、そちらの方が安く済みます。</p>
+</section>
+
+<section>
+  <div class="sechead"><span class="num">BUILD</span><h2>組立の順番</h2></div>
+  <ol class="steps">
+    <li><div>
+      <h3>ブロックと土台の間に縁切りシートを入れる</h3>
+      <p>ブロックは地中の水を毛細管で吸い上げ、直接載っている木にそのまま渡します。<strong>止められるのは骨組みを載せる前の今だけ</strong>です。土台を外して縁切り層を挟みます。選択肢は2つで、<strong>決め手はアンカーボルトのねじ山の余り</strong>です。</p>
+      <p><strong>20mm以上余っているなら「気密パッキンロング」</strong>（城東テクノ <span class="mono">KPK-N105</span>／105×908×20mm・¥825/本・外周5.8mで7本＝約¥5,800）。<strong>品番の「KPK」が気密、「KP-L」は通気</strong>なので買い間違えに注意。設計された製品で、土台の底面が浮くので乾きます。<strong>通気タイプではなく気密タイプを</strong>──この小屋には床下がないので、20mmの通気スリットは外と室内を床上8〜15cmで直結させ、冬に足元を隙間風が吹き抜けます。鶏は寒さよりすきま風に弱い。</p>
+      <p><strong>余っていないなら「ブチル防水テープ」</strong>（片面・幅100mm、20m巻 約¥2,500）。高さが変わらないのが最大の利点です。ブロック天端の埃と水気を落としてから貼り、継ぎ目は5cm重ねます。外している間に<strong>土台の木口を塗る</strong>のも忘れずに（底面は塞がるので塗らなくて構いません）。</p>
+    </div></li>
+    <li><div>
+      <h3>土台の水平と直角を測り直す</h3>
+      <p>対角線を測って2本が同じ長さか確認します（190×100なら対角は約214.7cm）。ここが狂っていると最後に扉が閉まりません。土台上端の高さも水平器で見て、低い側は薄板で調整します。</p>
+    </div></li>
+    <li><div>
+      <h3>全部材を切ってから防腐塗装、乾かす</h3>
+      <p>組んでから塗ると木口・接合部・裏面が塗れません。切り終わった段階で、特に<strong>柱の下側の木口</strong>をたっぷり塗ります。<strong>合板は木口を最優先で2〜3回、そのうえで表裏の両面</strong>を塗ってください。片面だけ塗ると含水率に差が出て<strong>反ります</strong>。鶏を入れるので完全に乾かしてから組みます。</p>
+    </div></li>
+    <li><div>
+      <h3>前面フレームを地面で組む</h3>
+      <p>前柱3本（167）＋前桁（190）を地面に寝かせて組み、直角を確認してから起こします。1人でやるなら仮の突っ張り棒を先に用意しておくと安全です。</p>
+    </div></li>
+    <li><div>
+      <h3>背面フレームも同様に組んで立てる</h3>
+      <p>後柱3本（156）＋後桁（190）。立てたら前後を仮の斜め材でつないで自立させます。</p>
+    </div></li>
+    <li><div>
+      <h3>側面つなぎ（E）と中段材（F・G）を入れる</h3>
+      <p>FL+80に入れます。ここで前後がつながって箱になり、はじめて構造が固まります。ねじれが残っていないか対角を測って直してから本締め。</p>
+    </div></li>
+    <li><div>
+      <h3>垂木6本を載せる</h3>
+      <p>外側の2本を柱の外面に合わせ、間を等分（ピッチ約37cm）。前に10、後ろに8出します。1本ずつ前後位置を合わせ、斜めビス＋ひねり金物で固定します。</p>
+    </div></li>
+    <li><div>
+      <h3>波板を張る</h3>
+      <p>低い側から張ると重ねが逆になって雨が入るので、<strong>必ず高い側＝手前から</strong>。重ねは2.5山以上、ビスは山の頂点に5山おき。下穴を開けてから留めるとポリカが割れません。</p>
+    </div></li>
+    <li><div>
+      <h3>板張り → 金網の順で壁を塞ぐ</h3>
+      <p><strong>合板は必ず現物合わせで切ります。</strong>壁の形は合板の形（91×182）と一致しません──背面は190×125、側面は屋根勾配に沿った台形、正面のベイは81.5×85。<strong>骨組みを組んでから実寸を測って</strong>、図面の数字ではなく現物に合わせて切ってください。組み上がった枠は必ずどこか狂っています。</p>
+      <p>正面左ベイは、<strong>自動扉と産卵箱の開口を残して</strong>張ります。この段階までに自動扉を手元に用意しておいてください。製品ごとに開口寸法が違うので、<strong>現物を測ってから穴を開ける</strong>のが鉄則です。切り口はその都度、塗るのを忘れずに。</p>
+    </div></li>
+    <li><div>
+      <h3>自動扉（T50）を取り付ける</h3>
+      <p>正面左ベイの右寄り、床から2cm上げた位置に<strong>20×25の開口</strong>。左右と下に2.5cmずつ、<strong>開口の上には30.5cmの逃げ</strong>が要るので、壁面はFL+0〜66を空けておきます。取り付けたら電池（単3×2）を入れて<strong>何度か開閉テスト</strong>を。レールが床に近すぎると敷料を噛んで止まります。</p>
+    </div></li>
+    <li><div>
+      <h3>受け桟を渡して産卵箱を室内に据える</h3>
+      <p>先にFL+35へ受け桟（O）を渡し、その上に箱を載せて正面壁に留めます。<strong>箱の下は空けたまま</strong>にしてください。床面積が減らず、鶏の隠れ場所にもなります。壁の開口は幅40×高28（FL+39〜67）。<strong>開口の下端を箱の底より4cm高く</strong>するのを忘れずに。ここが敷居になって卵と敷料を止めます。</p>
+    </div></li>
+    <li><div>
+      <h3>集卵扉を付ける</h3>
+      <p>開口より四周2cm大きい板（N）を、<strong>上ヒンジで外から被せて</strong>留めます。かぶせ扉にするのは雨対策で、開ければそのまま庇になります。開けた状態で止まるようステーか紐を付けておくと、両手で卵を取れます。掛金は南京錠の通るものに。</p>
+    </div></li>
+    <li><div>
+      <h3>人用の扉を作って吊る</h3>
+      <p>扉は最後です。枠が完全に固まってから開口の実寸を測り、そこから5mm引いた寸法で作ります。図面の81.5をそのまま使うと入りません。蝶番は3枚、掛金は南京錠が通るものに。</p>
+    </div></li>
+    <li><div>
+      <h3>スロープを付けて、床に敷料を入れる</h3>
+      <p>自動扉の下に幅24×長さ45のスロープ。9cm間隔で桟を打って滑り止めにします。床は土のままで、上から<strong>もみ殻か砂を10cm</strong>敷きます。</p>
+    </div></li>
+  </ol>
+</section>
+
+<section>
+  <div class="sechead"><span class="num">HENS</span><h2>4羽で使うための作り込み</h2></div>
+  <div class="cols">
+    <div class="card">
+      <h3>広さ</h3>
+      <p>内寸は172×82で<strong>約1.41㎡</strong>、4羽なら1羽あたり0.35㎡。奥行を100にしたことで<strong>就寝と産卵には十分な余裕</strong>ができました。給餌器と給水器は<strong>吊り下げ</strong>にするので床は食いません。6羽まで増やしても収まる広さです。</p>
+    </div>
+    <div class="card">
+      <h3>止まり木</h3>
+      <p>幅方向に1本、<strong>前から60cm・FL+85</strong>。ちょうど左右の側面つなぎ材（E）の上端なので、そこに載せて留めれば金物いらずです。4羽なら1羽25cmで100cmあれば十分、170cm取れます。奥行が広がったぶん<strong>後ろの壁から30cm以上離せる</strong>ので、尾羽が壁に擦れません。</p>
+    </div>
+    <div class="card">
+      <h3>産卵箱は1室でいい</h3>
+      <p>目安は3〜4羽に1室なので、<strong>4羽なら1室</strong>。内寸38×35は標準（30×35）より広く、2羽が同時に入れます。鶏は室内側から縁板を越えて入るので入口はFL+45、止まり木のFL+85より低い。<strong>鶏は止まり木の方で寝ます</strong>。ここが逆になると箱が糞まみれになります。</p>
+    </div>
+    <div class="card">
+      <h3>土の床の扱い</h3>
+      <p>土に<strong>もみ殻か砂を10cm</strong>。糞を掻き混ぜて分解させる「ディープリター」にすると、掃除は数か月に一度で済みます。土が湿ると匂うので、小屋の中の地面を周囲より少し高くしておくこと。既存の土台はGL+15にあるので、木が土に触れていないのは good です。</p>
+    </div>
+    <div class="card">
+      <h3>給餌器と給水器は吊る</h3>
+      <p>床置きは避けてください。敷料を蹴り込まれ、糞も入ります。<strong>縁の高さを鶏の背の高さ（敷料面からFL+45〜50）に合わせて吊る</strong>のが定石です。中央の側面つなぎ材（E・FL+80）から短い鎖で吊れば、新しい部材は要りません。床面積も食いません。</p>
+    </div>
+    <div class="card">
+      <h3>水は必ずニップル式で</h3>
+      <p>小屋の中で<strong>皿式の給水器を使うと必ずこぼれます</strong>。濡れた敷料はアンモニアとコクシジウムの温床で、呼吸器と腸をやられます。<strong>ニップル（乳首）式のバケツ型</strong>にすればこぼれません。三田は冬に凍るので、朝夕の入れ替えは想定しておいてください。</p>
+    </div>
+    <div class="card">
+      <h3>通気</h3>
+      <p>正面はFL+85から上が全面金網。背面・側面も上端25cmは金網にして、軒下で空気が抜けるようにします。鶏は寒さより<strong>湿気とアンモニア</strong>に弱いので、冬も塞ぎ切らないこと。風が直接当たる面だけ落とし込みの板で塞げるようにしておくと万全です。</p>
+    </div>
+    <div class="card">
+      <h3>砂浴び場</h3>
+      <p>床が土なら鶏が自分で掘って砂浴びします。乾いた砂と草木灰を混ぜたものを浅い箱で置いておくと、ダニ対策になって効きます。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sechead"><span class="num">RISK</span><h2>先に手を打っておくこと</h2></div>
+  <ul class="check">
+    <li><span><strong>床が土なので、掘り返し対策は必須です。</strong>基礎ブロックの外周に金網を寝かせて外側へ30cm敷き、ピンで留めます（スカート）。埋めるより施工が楽で効果は同じです。イタチもハクビシンも、まず壁際を掘ります。</span></li>
+    <li><span><strong>金網は目合10mmの亜鉛引亀甲金網を1重で。</strong>10mmならイタチ・テンはもちろん<strong>ネズミも通れません</strong>。そして目の細かさが効く本当の理由は、<strong>獣が指や爪を掛けられない</strong>ことです。16mmだとアライグマやハクビシンが指を入れて掴んで引けますが、10mmでは掴む支点がない。力をかけようがないので、2重にする必要が消えます。</span></li>
+    <li><span><strong>切り口は必ず内側へ折り返す。</strong>亀甲金網は切ると線の端がバネのように跳ねて出ます。鶏が目や脚を傷つける原因になるので、1cmほど折り返してから押さえ縁で挟んでください。折り返した端は錆にも強くなります。</span></li>
+    <li><span><strong>金網はステープルで留めず、押さえ縁で挟む。</strong>獣は網そのものより<strong>縁を引き剥がしにきます</strong>。15×30程度の桟で網を挟んでビス留めすれば、線径1.0mmでも人力では剥がせません。切り口は内側に折り返しておくこと。</span></li>
+    <li><span><strong>自動扉は「挟まれ防止」つきを選ぶ。</strong>安価な製品には障害物検知がなく、閉まる途中の鶏を挟みます。あとレールに敷料や糞が入ると止まるので、月に一度は掃除できる位置に付けてください。冬は凍結で動かないこともあります。</span></li>
+    <li><span><strong>庭の囲いは鶏を留めるためのもので、獣を止めるものではありません。</strong>イタチもテンもハクビシンも塀を登り、猫は隙間から入ります。<strong>夜間の防壁は小屋だけ</strong>だと考えて、金網の2重張りとスカートは省かないでください。</span></li>
+    <li><span><strong>日中の空からの敵。</strong>カラスは卵と飼料を狙い、トビやオオタカは鶏そのものを狙います。庭に低木や物陰など<strong>とっさに隠れられる場所</strong>があると生存率が上がります。放し飼いの犬も現実的な脅威です。</span></li>
+    <li><span><strong>鶏は庭を掘り返します。</strong>4羽でも花壇や家庭菜園はかなり荒らされます。鶏を囲うのではなく<strong>守りたい場所の方を囲う</strong>方が、手間も費用も少なく済みます。</span></li>
+    <li><span><strong>建設地は内陸なので、亜鉛引で十分もちます。</strong>三田市は海から30km以上離れていて飛来塩分がありません。ISO 9223のC2（田園）にあたり、亜鉛の減りは年0.4μm程度。線径0.85mmの亀甲金網なら<strong>メッキだけで10〜20年</strong>の計算です。ステンレスに投資する理由はありません。</span></li>
+    <li><span><strong>合板は撥水しません。「特類」は接着剤の話です。</strong>特類・1類が意味するのは<strong>濡れても単板が剥がれない</strong>ことだけで、木そのものは普通に水を吸います。構造用合板は本来<strong>外装材で覆われる前提の下地材</strong>なので、むき出しで使うなら塗装は必須です。</span></li>
+    <li><span><strong>土台に造膜型の塗料（シリコン系など）が塗ってある場合。</strong>膜が生きている間の撥水は強いのですが、<strong>ブロックから上がってくる湿気の逃げ道がなくなる</strong>のが弱点です。塗り替えは同じ造膜型を重ねるしかありません（浸透型はもう入りません）。5〜8年で膜が割れ始めたら塗り直し。それより効くのは<strong>外周に砂利を敷いて跳ね返りと滞水を減らすこと</strong>と、下の項目の水切りです。</span></li>
+    <li><span><strong>合板の下端は土台より10〜15mm下げる。</strong>土台の上面で切り揃えると、そこに水が溜まって合板と土台の両方が腐ります。少し下げて水が滴り落ちるようにするか、下端を斜めに削って水切りにしてください。<strong>合板が最初に傷むのは面ではなく下端と木口</strong>です。</span></li>
+    <li><span><strong>金網の切り口に亜鉛スプレーを塗る。</strong>亜鉛メッキは切った断面だけメッキがありません。周りの亜鉛が身代わりになって守るので即座に錆びはしませんが、<strong>ジンクリッチペイント（ローバル等）を切り口に一塗り</strong>するだけで弱点の大半が消えます。1本1,500円ほど、10分の作業です。</span></li>
+    <li><span><strong>地面に敷くスカートは消耗品と割り切る。</strong>常に湿っているので、壁面の金網よりずっと早く傷みます。コンクリートで固めたりせず<strong>ピンで留めるだけ</strong>にしておいて、数年ごとに交換できる形にしておいてください。</span></li>
+    <li><span><strong>殺鼠剤は絶対に使わないでください。</strong>毒を食べたネズミはふらついて出てきます。<strong>鶏はそれを見つけて食べます</strong>──鶏は本当にネズミを捕って食べる動物です。二次中毒で鶏が死にます。小屋から離れた場所に置いても、弱ったネズミが歩いてくる以上は同じことです。ネズミ対策は<strong>餌の管理と、鶏が触れない密閉箱に入れた物理トラップ</strong>に限ります。</span></li>
+    <li><span><strong>夜に餌を外に残さない。</strong>残った飼料がネズミを呼び、そのネズミがイタチとテンを呼びます。<strong>獣を敷地に引き寄せているのは鶏ではなく餌</strong>であることが多い。給餌器は夕方に片づけるか密閉容器へ。費用ゼロで効く対策です。</span></li>
+    <li><span><strong>危ないのは夜と、朝夕の薄暗い時間帯です。</strong>イタチもテンもキツネもその時間に動きます。昼間は最も安全な時間帯なので、<strong>放す時間を削るより、自動扉の開閉時刻を絞る</strong>方が効きます。T50はタイマーが使えるので、朝は日の出から30〜60分遅らせて開ける。閉まる方は鶏が自分で戻ってから閉じる必要があるので、光センサー任せで構いません。</span></li>
+    <li><span><strong>電気柵はイタチ・テンには効きません。</strong>電気柵は「毛の少ない鼻」に電線の高さを合わせて効かせる道具です。イノシシやシカは鼻の高さが決まっているので成立しますが、イタチは体幅4〜5cmで線の間をすり抜け、しかも木を登って上から来ます。<strong>止めるのは金網の仕事</strong>で、電気柵に予算を回す意味はありません。イノシシやシカが庭に出るなら別の目的で検討する価値はありますが、それは鶏を守る話とは別です。</span></li>
+    <li><span><strong>掛金は回転式ラッチを避ける。</strong>アライグマやハクビシンは回して開けます。人用の扉も産卵箱のフタも、カラビナか南京錠を通せるタイプに。</span></li>
+    <li><span><strong>産卵箱のフタの雨仕舞い。</strong>屋根の前出は11cmしかないので、35cm張り出す箱には雨がかかります。フタに勾配をつけるか、波板の端材を貼ってください。フタと壁の合わせ目は上から板を被せる「水切り」を1枚。</span></li>
+    <li><span><strong>垂木のスパンが52cmから82cmに増えました。</strong>45×45のままで積雪30cm程度までは計算上もちます（曲げ応力1.8N/mm²・たわみ0.8mm、杉の許容6.4に対し余裕あり）。<strong>建設地の三田市は多雪区域ではない</strong>ので、このままで問題ありません。50cmを超える雪が毎年積もるようなら、垂木を60×45にするか前後の中間に母屋を1本入れてください。</span></li>
+    <li><span><strong>奥の排水スペース。</strong>屋根の水が全部奥に落ちます。奥が塀や隣地に近いなら、雨樋を付けるか奥に50cm以上の余裕を確保してください。</span></li>
+    <li><span><strong>方位。</strong>開口の大きい高い面（前面）を南〜南東に向けると、日照と乾きが良くなります。自動扉も正面なので、鶏は南側の庭に出ることになります。</span></li>
+    <li><span><strong>塗料は浸透型を。造膜型のペンキは合板に向きません。</strong>キシラデコールなどの浸透性木材保護塗料を使ってください。ウレタン系のペンキは膜を作って撥水は強いのですが、<strong>木口から入った水の逃げ場がなくなり、内部から腐って一気に剥離します</strong>。浸透型なら木が呼吸できるぶん、劣化が緩やかで塗り直しも楽です。</span></li>
+    <li><span><strong>内側は鶏に安全なものを。</strong>鶏が突いて塗膜を食べます。内側と産卵箱の中は無塗装か柿渋・ウッドロングエコに。ただし内側を完全に無塗装にすると片面塗装になって反るので、<strong>薄くても両面に何かを塗る</strong>のが正解です。どの塗料でも完全乾燥後に入居させます。</span></li>
+  </ul>
+</section>
+
+<section>
+  <div class="sechead"><span class="num">TODO</span><h2>次に決めること</h2></div>
+  <ul class="check">
+    <li><span><strong>身長に対して167で足りるか</strong> ── かがまずに入れるかは、この一点だけです。足りなければ前柱・後柱を同じだけ伸ばすだけで、他は何も変わりません。</span></li>
+    <li><span><strong>自動扉の製品</strong> ── これが決まらないと正面左の壁に穴を開けられません。<strong>骨組みより先に注文しておくのが正解</strong>です。光センサー式かタイマー式か（併用型が便利）、電池かソーラーか、開口寸法はいくつか。図面は開口24×32・ユニット高68cmで描いていますが、製品に合わせて動かします。</span></li>
+    <li><span><strong>風切羽を切るかどうか</strong> ── 品種と塀の高さ次第です。ボリスブラウンのような実用鶏は重くてあまり飛びませんが、軽い品種や若鶏は1.5mの塀を越えます。越えるようなら片翼だけ風切羽を切ります（片方だけにするのは、バランスを崩させて飛べなくするためです）。</span></li>
+    <li><span><strong>屋根材</strong> ── ポリカ波板（明るい・安い）か、ガルバリウム波板（耐久・遮熱）か。夏の暑さが心配ならガルバ＋下に断熱材という手もあります。</span></li>
+    <li><span><strong>夕方の点呼をどうするか</strong> ── 自動扉は時間で閉まるので、1羽でも外に残ると朝にはいません。<strong>閉まる前に4羽そろっているか確認する習慣</strong>だけは必要です。扉が閉じたあとに小屋を覗いて数える、で十分です。</span></li>
+  </ul>
+</section>
+
+<footer>
+  鶏小屋 骨組み図 ／ 幅190 × 奥行100 × 室内高167 ／ 4羽・土の床 ／ 単位 cm（材の断面のみ mm）<br>
+  寸法は既存基礎の水平・直角が出ている前提です。墨付け前に必ず現物を測って確定してください。
+</footer>
+
+</div>
+
+</body></html>
