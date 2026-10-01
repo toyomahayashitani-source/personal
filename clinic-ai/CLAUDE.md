@@ -50,7 +50,7 @@
 - `docs/handover.md` — **引き継ぎメモ。再開時の入口**
 - `docs/` — 市場調査(`market-scan.md`)、商品定義(`product-definition.md`)、クリニックの書類一覧(`clinic-documents.md`、ヒアリングの武器)
 - `docs/sales/` — 営業資料: 院長宛手紙(`letter-to-director.md`)、A4ペラ(`onepager.html`、印刷して使う)、
-  説明資料(`what-ai-can-do.html`、外来の一日×AIの到達レベル。ヒアリングと勉強会で使う)
+  説明資料(`what-ai-can-do.html` と `what-ai-can-do.pptx`、外来の一日×AIの到達レベル。ヒアリングと勉強会で使う。**配布はpptx版**)
 - `docs/ops/` — 運用まわりの検討メモ(`email-setup.md`)
 - `site/index.html` — 事業サイト(1ページ完結、**未公開**)
 - `src/` — デモ(静的HTML)。`index.html`がデモメニュー。ローカルサーバは`.claude/launch.json`の`clinic`構成(port 3100)で起動
@@ -60,5 +60,7 @@
 
 ## メモ
 
-- 営業資料・サイトの氏名/電話/メールは `〇〇` のプレースホルダーのまま。**対外使用前に埋めること**。
+- 連絡先は反映済み(林谷 豊山 / 090-1910-2222 / t_hayashitani@icloud.com)。
+  残る `〇〇` は意図的なもの — 手紙の宛先・日付・差出人の市名(市名のみ未確定)、デモ内の架空の病院名。消さないこと。
+  独自ドメイン取得後はメールを `info@〜` に一括置換する。
 - 決まったことは handover.md に追記していく(このファイルは要約と入口に徹する)。
