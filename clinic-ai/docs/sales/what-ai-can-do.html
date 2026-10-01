@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>クリニックでAIにできること</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap">
+<style>
+/* 外来の一日を縦の軸にして、各工程に「AIがどこまで届くか」を3段階で刻む */
+:root {
+  --bg: #f1f5f8;
+  --surface: #ffffff;
+  --surface-sunk: #e8eff4;
+  --line: #d2dfe8;
+  --ink: #1f2d37;
+  --ink-soft: #5a6c79;
+  --primary: #15607f;
+  --primary-soft: #e3eff4;
+  --lv-full: #1f8f68;
+  --lv-full-bg: #e2f3ec;
+  --lv-draft: #a9711a;
+  --lv-draft-bg: #f8eedc;
+  --lv-human: #5a6c79;
+  --lv-human-bg: #e6ecf0;
+  --font-display: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  --font-body: "BIZ UDPGothic", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101920;
+    --surface: #18242c;
+    --surface-sunk: #141e25;
+    --line: #2b3b46;
+    --ink: #dfe9ef;
+    --ink-soft: #93a7b4;
+    --primary: #58b3d6;
+    --primary-soft: #16303d;
+    --lv-full: #46c295;
+    --lv-full-bg: #14312a;
+    --lv-draft: #d6a34c;
+    --lv-draft-bg: #33280f;
+    --lv-human: #8599a6;
+    --lv-human-bg: #212d35;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101920;
+  --surface: #18242c;
+  --surface-sunk: #141e25;
+  --line: #2b3b46;
+  --ink: #dfe9ef;
+  --ink-soft: #93a7b4;
+  --primary: #58b3d6;
+  --primary-soft: #16303d;
+  --lv-full: #46c295;
+  --lv-full-bg: #14312a;
+  --lv-draft: #d6a34c;
+  --lv-draft-bg: #33280f;
+  --lv-human: #8599a6;
+  --lv-human-bg: #212d35;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: var(--font-body); font-size: 15px; line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 860px; margin: 0 auto; padding-inline: 20px; padding-block: 0 56px; }
+h1, h2, h3, .num, .eyebrow { font-family: var(--font-display); text-wrap: balance; }
+p { margin: 0; }
+strong { font-weight: 700; }
+
+/* --- 表紙 --- */
+.cover { padding-block: 48px 36px; border-bottom: 3px solid var(--primary); }
+.eyebrow {
+  font-size: 12px; font-weight: 700; letter-spacing: .14em;
+  color: var(--primary); margin-bottom: 14px;
+}
+.cover h1 {
+  margin: 0; font-size: clamp(27px, 6.4vw, 42px); font-weight: 900;
+  line-height: 1.3; letter-spacing: .01em;
+}
+.cover .lede {
+  margin-top: 18px; font-size: clamp(15px, 2.4vw, 17px);
+  color: var(--ink-soft); max-width: 40em;
+}
+
+/* --- 大前提 --- */
+.premise {
+  margin-top: 28px; background: var(--primary-soft);
+  border-left: 5px solid var(--primary); border-radius: 0 8px 8px 0;
+  padding: 20px 22px;
+}
+.premise h2 { margin: 0 0 8px; font-size: 16px; font-weight: 700; color: var(--primary); }
+.premise p { font-size: 14.5px; }
+
+/* --- セクション --- */
+section { margin-top: 52px; }
+.sec-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+.sec-head h2 { margin: 0; font-size: clamp(20px, 3.6vw, 25px); font-weight: 700; letter-spacing: .01em; }
+.sec-head .tag {
+  font-family: var(--font-display); font-size: 11px; font-weight: 700; letter-spacing: .1em;
+  color: var(--ink-soft); border: 1px solid var(--line); border-radius: 99px; padding: 2px 10px;
+}
+.sec-note { color: var(--ink-soft); font-size: 14px; margin-bottom: 24px; max-width: 44em; }
+
+/* --- 到達レベルの凡例 --- */
+.legend {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+  margin-bottom: 28px;
+}
+.legend div { border-radius: 8px; padding: 12px 14px; border: 1px solid var(--line); min-width: 0; }
+.legend .lv { font-family: var(--font-display); font-weight: 700; font-size: 13.5px; display: block; margin-bottom: 3px; }
+.legend small { font-size: 12.5px; color: var(--ink-soft); line-height: 1.6; display: block; }
+.legend .l-full { background: var(--lv-full-bg); }
+.legend .l-full .lv { color: var(--lv-full); }
+.legend .l-draft { background: var(--lv-draft-bg); }
+.legend .l-draft .lv { color: var(--lv-draft); }
+.legend .l-human { background: var(--lv-human-bg); }
+.legend .l-human .lv { color: var(--lv-human); }
+
+/* --- 一日の流れ --- */
+.stage {
+  display: grid; grid-template-columns: 54px 1fr; gap: 18px;
+  padding-bottom: 26px; margin-bottom: 26px; border-bottom: 1px solid var(--line);
+}
+.stage:last-of-type { border-bottom: none; margin-bottom: 0; }
+.rail { text-align: center; }
+.rail .num {
+  display: block; font-size: 25px; font-weight: 900; color: var(--primary);
+  line-height: 1; font-variant-numeric: tabular-nums;
+}
+.rail .when {
+  display: block; font-size: 11px; color: var(--ink-soft); margin-top: 6px;
+  letter-spacing: .04em; writing-mode: horizontal-tb;
+}
+.body { min-width: 0; }
+.stage h3 { margin: 0 0 4px; font-size: 19px; font-weight: 700; }
+.chip {
+  display: inline-block; font-family: var(--font-display); font-size: 11.5px; font-weight: 700;
+  border-radius: 99px; padding: 2px 11px; margin-bottom: 12px; letter-spacing: .03em;
+}
+.c-full { background: var(--lv-full-bg); color: var(--lv-full); }
+.c-draft { background: var(--lv-draft-bg); color: var(--lv-draft); }
+.pair { display: grid; gap: 12px; }
+.pair .now, .pair .can { padding-left: 14px; border-left: 3px solid var(--line); }
+.pair .can { border-left-color: var(--primary); }
+.pair .lbl {
+  font-family: var(--font-display); font-size: 11.5px; font-weight: 700;
+  letter-spacing: .1em; color: var(--ink-soft); display: block; margin-bottom: 2px;
+}
+.pair .can .lbl { color: var(--primary); }
+.means {
+  margin-top: 14px; background: var(--surface-sunk); border-radius: 7px;
+  padding: 11px 14px; font-size: 13.5px; color: var(--ink-soft);
+}
+.means b { color: var(--ink); font-weight: 700; }
+.caution {
+  margin-top: 12px; font-size: 13.5px; color: var(--ink-soft);
+  border: 1px dashed var(--lv-draft); border-radius: 7px; padding: 11px 14px;
+}
+.caution b { color: var(--lv-draft); }
+
+/* --- 表 --- */
+.scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 14px; }
+caption { text-align: left; font-size: 13px; color: var(--ink-soft); padding-bottom: 8px; }
+th, td { text-align: left; padding: 11px 13px; border-bottom: 1px solid var(--line); vertical-align: top; }
+thead th {
+  font-family: var(--font-display); font-size: 12.5px; font-weight: 700; letter-spacing: .05em;
+  color: var(--primary); border-bottom: 2px solid var(--primary); white-space: nowrap;
+}
+tbody th { font-weight: 700; white-space: nowrap; }
+td small { color: var(--ink-soft); font-size: 13px; }
+
+/* --- 試算 --- */
+.calc { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px; }
+.formula {
+  font-family: var(--font-display); font-weight: 700; font-size: clamp(14px, 2.6vw, 16.5px);
+  color: var(--primary); line-height: 2; text-align: center;
+  background: var(--primary-soft); border-radius: 7px; padding: 14px 12px; margin-bottom: 20px;
+}
+.calc-rows { width: 100%; min-width: 0; font-size: 14px; }
+.calc-rows table { min-width: 0; }
+.calc-rows td { padding: 8px 10px; }
+.calc-rows .n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.calc-rows tfoot td { border-bottom: none; border-top: 2px solid var(--primary); font-weight: 700; padding-top: 12px; }
+.calc .result {
+  margin-top: 16px; text-align: center; font-family: var(--font-display);
+  font-size: clamp(17px, 3.4vw, 22px); font-weight: 900; color: var(--lv-full); line-height: 1.5;
+}
+.calc .result small { display: block; font-size: 13px; font-weight: 400; color: var(--ink-soft); margin-top: 7px; font-family: var(--font-body); }
+
+/* --- できないこと --- */
+.limits { display: grid; gap: 14px; }
+.limit {
+  background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--ink-soft);
+  border-radius: 0 9px 9px 0; padding: 16px 18px;
+}
+.limit h3 { margin: 0 0 5px; font-size: 16px; font-weight: 700; }
+.limit p { font-size: 14px; color: var(--ink-soft); }
+.limit .law {
+  display: inline-block; font-family: var(--font-display); font-size: 11px; font-weight: 700;
+  letter-spacing: .06em; color: var(--ink-soft); border: 1px solid var(--line);
+  border-radius: 4px; padding: 1px 7px; margin-left: 8px; vertical-align: 2px;
+}
+
+/* --- 順番 --- */
+.steps { display: grid; gap: 10px; counter-reset: s; }
+.step {
+  display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 9px; padding: 15px 17px;
+}
+.step::before {
+  counter-increment: s; content: counter(s);
+  font-family: var(--font-display); font-size: 15px; font-weight: 900; color: var(--surface);
+  background: var(--primary); border-radius: 50%; width: 28px; height: 28px;
+  display: grid; place-items: center; font-variant-numeric: tabular-nums;
+}
+.step .t { font-weight: 700; font-size: 15.5px; }
+.step .d { font-size: 13.5px; color: var(--ink-soft); margin-top: 2px; }
+.step > div { min-width: 0; }
+
+/* --- フッタ --- */
+footer { margin-top: 56px; border-top: 3px solid var(--primary); padding-top: 24px; }
+.sig { font-family: var(--font-display); font-size: 19px; font-weight: 700; color: var(--primary); }
+.sig small { display: block; font-family: var(--font-body); font-size: 13px; font-weight: 400; color: var(--ink-soft); margin-top: 5px; line-height: 1.8; }
+.contact { margin-top: 16px; font-size: 14.5px; line-height: 2; }
+.contact .ph { color: var(--ink-soft); }
+.srcnote { margin-top: 22px; font-size: 12.5px; color: var(--ink-soft); line-height: 1.8; border-top: 1px solid var(--line); padding-top: 14px; }
+
+@media (max-width: 620px) {
+  .legend { grid-template-columns: 1fr; }
+  .stage { grid-template-columns: 42px 1fr; gap: 14px; }
+  .rail .num { font-size: 21px; }
+}
+@media print {
+  body { background: #fff; font-size: 11pt; }
+  .wrap { max-width: none; padding-block: 0 0; }
+  section, .stage, .calc, .limit, .step { break-inside: avoid; }
+  .cover { padding-top: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="cover">
+    <div class="eyebrow">北摂AIサービス｜クリニック向け資料</div>
+    <h1>クリニックで<br>AIにできること</h1>
+    <p class="lede">診察はAIにはできません。けれど診察の「前後」に積み上がっている仕事は、いまかなりの部分まで機械に渡せます。外来の一日をたどりながら、どこに何が入り、どこまでが人の手に残るのかを整理しました。</p>
+  </header>
+
+  <div class="premise">
+    <h2>はじめに、線引きを</h2>
+    <p>診察・診断・治療の判断は、医師法により医師にしかできません。ここで扱うのはすべてその<strong>前後の事務</strong>です。AIが出すものはすべて下書きで、確認して署名するのは先生です。この建て付けは、どの工程でも崩しません。</p>
+  </div>
+
+  <section>
+    <div class="sec-head">
+      <h2>外来の一日と、AIの届く範囲</h2>
+      <span class="tag">5つの工程</span>
+    </div>
+    <p class="sec-note">工程ごとに「どこまで機械に渡せるか」は違います。全部を同じ調子で語るサービス紹介が多いので、ここでは3段階に分けて書きます。</p>
+
+    <div class="legend">
+      <div class="l-full">
+        <span class="lv">置き換えられる</span>
+        <small>人が手を動かさなくても回る。確認は例外対応のときだけ。</small>
+      </div>
+      <div class="l-draft">
+        <span class="lv">下書きまで</span>
+        <small>AIが作り、人が目を通して仕上げる。確認は毎回必要。</small>
+      </div>
+      <div class="l-human">
+        <span class="lv">人がやる</span>
+        <small>診察、診断、最終判断、署名。ここは渡さない。</small>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="rail"><span class="num">1</span><span class="when">来院前</span></div>
+      <div class="body">
+        <h3>電話と予約</h3>
+        <span class="chip c-full">置き換えられる</span>
+        <div class="pair">
+          <div class="now">
+            <span class="lbl">いま起きていること</span>
+            <p>診察中も予約・問い合わせの電話が鳴り、受付の手が止まります。昼休みと診療後に折り返しが溜まり、繋がらなかった患者さんは他院にかけ直します。</p>
+          </div>
+          <div class="can">
+            <span class="lbl">AIでできること</span>
+            <p>予約、休診日、持ち物、駐車場、道順といった定型の問い合わせに、AIが24時間自動で応対します。用件は文字起こしと要約で残るので、人が見るのは折り返しが要るものだけになります。</p>
+          </div>
+        </div>
+        <div class="means"><b>手段</b>：既製のAI電話応対サービス。電話工事は不要で、既存の番号を転送するだけで始められます。費用は月数千円から。</div>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="rail"><span class="num">2</span><span class="when">受付</span></div>
+      <div class="body">
+        <h3>問診と受付事務</h3>
+        <span class="chip c-full">置き換えられる</span>
+        <div class="pair">
+          <div class="now">
+            <span class="lbl">いま起きていること</span>
+            <p>紙の問診票を渡し、書いてもらい、読み取り、足りないところを口頭で聞き、カルテに打ち直します。同じ情報を二度扱っています。</p>
+          </div>
+          <div class="can">
+            <span class="lbl">AIでできること</span>
+            <p>来院前にスマホで問診を済ませてもらいます。AIが患者さんの答えに応じて次の質問を変えるので、紙の定型問診より深く聞けます。診察室には要約が届き、<strong>転記という作業そのものが消えます</strong>。</p>
+          </div>
+        </div>
+        <div class="means"><b>手段</b>：Web問診・AI問診サービス。電子カルテに連携できる製品もあります。マイナ保険証での資格確認、自動精算機と組み合わせると、受付の立ち仕事がさらに減ります。</div>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="rail"><span class="num">3</span><span class="when">診察中</span></div>
+      <div class="body">
+        <h3>カルテ記録</h3>
+        <span class="chip c-draft">下書きまで</span>
+        <div class="pair">
+          <div class="now">
+            <span class="lbl">いま起きていること</span>
+            <p>患者さんを診ながらキーボードを打ちます。画面を見ている時間が、相手を見る時間を削っています。</p>
+          </div>
+          <div class="can">
+            <span class="lbl">AIでできること</span>
+            <p>診察中の会話を拾って、SOAP形式のカルテ下書きを作ります。先生は打つのではなく、できた文章を直す側に回ります。</p>
+          </div>
+        </div>
+        <div class="caution"><b>正直に申し上げると、</b>ここは5つの工程の中でいちばん期待値の調整が要る場所です。専門用語、方言、患者さんとの同時発話で精度が落ちます。確認を省ける段階にはまだありません。導入するなら、最初から「直す前提」で運用を組む必要があります。</div>
+        <div class="means"><b>手段</b>：医療用語に特化した音声認識(アンビエントスクライブ)。汎用の文字起こしとは別物です。</div>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="rail"><span class="num">4</span><span class="when">診察後</span></div>
+      <div class="body">
+        <h3>書類作成</h3>
+        <span class="chip c-draft">下書きまで</span>
+        <div class="pair">
+          <div class="now">
+            <span class="lbl">いま起きていること</span>
+            <p>紹介状、病院からの返書への返事、診断書、主治医意見書、訪問看護指示書、症状詳記。昼休みと診療後に積み上がり、持ち帰りになることもあります。</p>
+          </div>
+          <div class="can">
+            <span class="lbl">AIでできること</span>
+            <p>カルテに書いた記載をもとに、本文の下書きが数十秒で出ます。もとの情報はすでにカルテにあり、それを別の形式に書き直しているだけなので、ここはAIがいちばん得意とする仕事です。</p>
+          </div>
+        </div>
+        <div class="means"><b>入力は3通りあり、順番があります</b>。①電子カルテの記載をコピーして貼る ── 手書きを経由しないので誤読がなく、いちばん速い。②診察の合間に30秒口述する ── キーボードが速くない先生に向きます。③紙のメモを撮影する ── 可能ではありますが、崩れた手書きや略語の読み違いが薬剤名や数値で起きると実害になるため、三番手です。</div>
+        <div class="caution"><b>仕上げは人の手に残ります。</b>AIが作るのは本文だけです。それを所定の書式に貼り込み、内容を確認し、署名捺印するのは先生です。主治医意見書のように自治体指定の様式があるものは、様式の項目ごとに下書きを分けて出す形にします。</div>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="rail"><span class="num">5</span><span class="when">月初・月末</span></div>
+      <div class="body">
+        <h3>レセプトと患者フォロー</h3>
+        <span class="chip c-draft">下書きまで</span>
+        <div class="pair">
+          <div class="now">
+            <span class="lbl">いま起きていること</span>
+            <p>月初に点検作業が集中します。返戻と査定への対応も重なり、残業の主な原因になりがちです。</p>
+          </div>
+          <div class="can">
+            <span class="lbl">AIでできること</span>
+            <p>提出前のレセプトから請求漏れや算定ミスの候補をAIが拾い出します。定期受診や予防接種の案内(リコール)も、対象の抽出から文面の作成まで自動化できます。</p>
+          </div>
+        </div>
+        <div class="caution"><b>拾うのはAI、決めるのは人。</b>指摘が出ても、採用するかどうかの判断は事務と先生が行います。</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>患者さんの情報を使わない仕事から始められます</h2>
+      <span class="tag">今日から試せる</span>
+    </div>
+    <p class="sec-note">院内の文章仕事には、そもそも患者情報が含まれません。契約も設定も要らず、効果だけ先に確かめられるので、最初の一歩に向いています。</p>
+    <div class="means" style="font-size:14.5px;">
+      患者さん向けの説明資料と同意書の文案 ／ 待合の掲示物 ／ ホームページのお知らせ ／ スタッフの求人票 ／ 院内マニュアルと研修資料 ／ 季節の注意喚起文
+      <br><br><b>ここで「AIはこの程度のことは書ける」という感覚を掴んでから、</b>患者情報を扱う工程に進むのが安全です。
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>どの書類が多いかは、診療科で変わります</h2>
+    </div>
+    <p class="sec-note">同じ「書類が大変」でも、中身は科によって別物です。効き方も変わります。</p>
+    <div class="scroll">
+      <table>
+        <caption>無床診療所で発生する主な書類(病院特有のものは除く)</caption>
+        <thead>
+          <tr><th>診療科</th><th>特に多い書類</th><th>AI化の効き方</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>内科<br><small>在宅併設</small></th>
+            <td>主治医意見書、訪問看護指示書、訪問リハビリ指示書、居宅療養管理指導の報告書</td>
+            <td><strong>効果がいちばん見えやすい</strong><small><br>量が別格。意見書と指示書だけで月10〜30通に達する院もあります。</small></td>
+          </tr>
+          <tr>
+            <th>整形外科</th>
+            <td>自賠責様式、後遺障害診断書、労災の様式5号・8号、装具作成の意見書</td>
+            <td>効果あり<small><br>1通あたりの手間が大きい書類が集中します。</small></td>
+          </tr>
+          <tr>
+            <th>心療内科<br>精神科</th>
+            <td>自立支援医療の診断書、障害年金の診断書、休職・復職の診断書</td>
+            <td><strong>時短が出やすい</strong><small><br>1通の記述量が多いぶん、下書きの価値が大きくなります。</small></td>
+          </tr>
+          <tr>
+            <th>小児科</th>
+            <td>登園・登校許可証、食物アレルギーの生活管理指導表、予防接種関連、乳幼児健診</td>
+            <td>効果あり<small><br>定型が多く、テンプレート化しやすい領域です。</small></td>
+          </tr>
+          <tr>
+            <th>耳鼻科<br>眼科・皮膚科</th>
+            <td>学校健診後の受診報告書、補聴器適合の診断書 ほか</td>
+            <td>書類より電話が主戦場<small><br>書類は少なめ。予約と問い合わせの自動化が先に効きます。</small></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sec-note" style="margin-top:18px;margin-bottom:0;">科を問わず発生するものとして、紹介状と返書、各種診断書、傷病手当金の意見書、症状詳記があります。このうち<strong>紹介状・返書・症状詳記は、カルテの内容を書き直すだけの仕事なので最も相性がよい</strong>書類です。逆に保険会社の証明書類は、各社で様式がばらばらな紙に転記する手間が残るため、効果は限定的です。</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>効果は、その場で計算できます</h2>
+    </div>
+    <p class="sec-note">抽象的な「業務効率化」ではなく、返ってくる時間を数字で出してから導入を決めていただく形にしています。必要なのは2つの数字だけです。</p>
+    <div class="calc">
+      <div class="formula">月に何通 × 1通に何分 × 削減できる割合<br>＝ 毎月返ってくる時間</div>
+      <div class="calc-rows scroll">
+        <table>
+          <tbody>
+            <tr><td>主治医意見書</td><td class="n">月20通</td><td class="n">× 25分</td><td class="n">= 500分</td></tr>
+            <tr><td>訪問看護指示書</td><td class="n">月10通</td><td class="n">× 20分</td><td class="n">= 200分</td></tr>
+          </tbody>
+          <tfoot>
+            <tr><td>合計</td><td class="n"></td><td class="n"></td><td class="n">700分 ≒ 11.7時間</td></tr>
+          </tfoot>
+        </table>
+      </div>
+      <p class="result">下書きで半分になれば、月およそ6時間
+        <small>在宅を併設した内科での一例です。実際の通数と所要時間は院によって大きく違うので、ヒアリングで貴院の数字に置き換えて計算します。</small>
+      </p>
+    </div>
+    <p class="sec-note" style="margin-top:18px;margin-bottom:0;">判断の基準は単純です。<strong>事務スタッフ半人分の人件費より軽い負担で、それ以上の時間が返るかどうか</strong>。返らないなら、入れないほうがいいとお伝えします。</p>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>AIにできないこと、させてはいけないこと</h2>
+    </div>
+    <p class="sec-note">できることと同じだけ、はっきりさせておくべき部分です。</p>
+    <div class="limits">
+      <div class="limit">
+        <h3>診察・診断・治療の判断<span class="law">医師法17条</span></h3>
+        <p>医師にしか行えません。AIによる代替は法的に不可能です。扱えるのは常に診察の前後だけです。</p>
+      </div>
+      <div class="limit">
+        <h3>診断を示唆する機能<span class="law">プログラム医療機器規制</span></h3>
+        <p>診断支援に踏み込むとプログラム医療機器(SaMD)の規制対象になります。そうした機能は作りませんし、お勧めもしません。</p>
+      </div>
+      <div class="limit">
+        <h3>患者情報を一般向けAIにそのまま入れること<span class="law">3省2ガイドライン</span></h3>
+        <p>医療情報システムの安全管理ガイドラインと個人情報保護法への準拠が必要です。入力内容が学習に使われない契約形態を選び、必要に応じて匿名化したうえで運用設計を行います。運用ルールは導入前に書面でお渡しします。</p>
+      </div>
+      <div class="limit">
+        <h3>最終責任</h3>
+        <p>どの工程でも、責任は先生にあります。AIの出力はすべて下書きであり、確認を省く運用は組みません。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>始めるなら、この順番で</h2>
+    </div>
+    <p class="sec-note">効果の大きさではなく、<strong>確かめやすさ</strong>の順に並べています。いちばん効くのは書類ですが、院ごとの作り込みが要るぶん4番目に置いています。</p>
+    <div class="steps">
+      <div class="step"><div><div class="t">患者情報を含まない文章仕事</div><div class="d">掲示物、説明資料、求人票。契約も設定も不要で、今日から試せます。</div></div></div>
+      <div class="step"><div><div class="t">電話の一次対応</div><div class="d">工事不要、転送設定のみ。効果がいちばん早く目に見えます。</div></div></div>
+      <div class="step"><div><div class="t">Web問診</div><div class="d">転記作業が消え、受付の負担がはっきり軽くなります。</div></div></div>
+      <div class="step"><div><div class="t">書類の下書き</div><div class="d">効果は最大。貴院のカルテ・書式・診療科に合わせたテンプレートを一緒に作ります。</div></div></div>
+      <div class="step"><div><div class="t">カルテ記録の自動化</div><div class="d">期待値を揃えてから。前の4つが回ってからで遅くありません。</div></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head">
+      <h2>まずは15分、お話を聞かせてください</h2>
+    </div>
+    <p class="sec-note" style="max-width:40em;">どの書類が月に何通あるか、電話が一日に何本鳴るか。それだけ伺えれば、その場で返ってくる時間を計算してお見せできます。実際の画面もお持ちします。売り込みではなく、まず現場の実情を教えていただきたいと考えています。こちらからお電話することはいたしません。</p>
+  </section>
+
+  <footer>
+    <div class="sig">北摂AIサービス
+      <small>クリニック向けAI導入の伴走パートナー｜豊中・吹田・箕面・池田・高槻・茨木・摂津・島本 ほか北摂エリア(オンラインでのご相談は地域を問いません)</small>
+    </div>
+    <div class="contact">
+      <span class="ph">〇〇 〇〇</span><br>
+      TEL <span class="ph">〇〇〇-〇〇〇〇-〇〇〇〇</span>　／　Mail <span class="ph">〇〇〇〇@〇〇〇</span>
+    </div>
+    <p class="srcnote">本資料に挙げたサービス分類・費用感は、2026年7月時点で各社が公表している情報および比較記事に基づく参考値です。実際の導入にあたっては、その時点の一次情報と貴院の環境をもとに個別にご確認いたします。所要時間の試算は一例であり、効果を保証するものではありません。</p>
+  </footer>
+
+</div>
+</body>
+</html>

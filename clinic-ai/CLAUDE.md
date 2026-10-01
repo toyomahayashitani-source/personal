@@ -49,7 +49,8 @@
 
 - `docs/handover.md` — **引き継ぎメモ。再開時の入口**
 - `docs/` — 市場調査(`market-scan.md`)、商品定義(`product-definition.md`)、クリニックの書類一覧(`clinic-documents.md`、ヒアリングの武器)
-- `docs/sales/` — 営業資料: 院長宛手紙(`letter-to-director.md`)、A4ペラ(`onepager.html`、印刷して使う)
+- `docs/sales/` — 営業資料: 院長宛手紙(`letter-to-director.md`)、A4ペラ(`onepager.html`、印刷して使う)、
+  説明資料(`what-ai-can-do.html`、外来の一日×AIの到達レベル。ヒアリングと勉強会で使う)
 - `docs/ops/` — 運用まわりの検討メモ(`email-setup.md`)
 - `site/index.html` — 事業サイト(1ページ完結、**未公開**)
 - `src/` — デモ(静的HTML)。`index.html`がデモメニュー。ローカルサーバは`.claude/launch.json`の`clinic`構成(port 3100)で起動
